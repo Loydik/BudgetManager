@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BudgetManager.DataAccess.Db;
 
 namespace BudgetManager
 {
@@ -23,6 +24,7 @@ namespace BudgetManager
         public MainWindow()
         {
             InitializeComponent();
+            Database db = new Database();
         }
     }
 }
