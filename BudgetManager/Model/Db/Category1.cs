@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
+using BudgetManager.Model.Db.Util;
 
 namespace BudgetManager.DataAccess.Db
 {
+    //Table Mapping
+
     [Table(Name = "categories")]
-    public class Category
+    public partial class Category : ICategory
     {
         [Column(IsPrimaryKey = true, Name = "category_id", IsDbGenerated = true)]
         public int ID { get; set; }

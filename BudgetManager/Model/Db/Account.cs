@@ -1,0 +1,33 @@
+﻿using System;
+using System.Data.Linq.Mapping;
+using System.Data.Linq;
+
+namespace BudgetManager.DataAccess.Db
+{
+    [Table(Name="accounts")]
+    public class Account
+    {
+        [Column(IsPrimaryKey = true, Name="account_id", IsDbGenerated=true)]
+        public int ID {get; set;}
+
+        [Column(Name = "name")]
+        public String Name {get; set;}
+
+        [Column(Name = "balance")]
+        public decimal Balance { get; set; }
+
+        
+        [Column(Name = "type_id")]
+        private int accountType;
+        private EntityRef<AccountType> _accountType = new EntityRef<AccountType>();
+
+        [Association(Name = "FK_Accounts_AccountTypes", IsForeignKey = true, Storage = "_accountType", ThisKey = "accountType")]
+        public AccountType AccountType
+        {
+            get { return _accountType.Entity; }
+            set { _accountType.Entity = value; }
+        }
+
+
+    }
+}

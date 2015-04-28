@@ -25,6 +25,8 @@ namespace BudgetManager
         {
             InitializeComponent();
             Database db = new Database();
+            Console.WriteLine(db.Categories.ToArray());
+            Console.ReadKey();
         }
     }
 }
