@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BudgetManager.Model.Db.Util;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     public partial class Category : ICategory
     {

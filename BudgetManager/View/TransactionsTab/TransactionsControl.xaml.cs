@@ -12,18 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BudgetManager.View.TransactionsTab;
 
-namespace BudgetManager
+namespace BudgetManager.View.TransactionsTab
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TransactionsControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TransactionsControl : UserControl
     {
-        public MainWindow()
+        public TransactionsControl()
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
     }

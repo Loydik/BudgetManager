@@ -2,7 +2,7 @@
 using System.Data.Linq.Mapping;
 using BudgetManager.Model.Db.Util;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     //Table Mapping
 

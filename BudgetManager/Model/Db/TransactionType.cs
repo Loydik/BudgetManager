@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     [Table(Name = "transaction_types")]
     public class TransactionType
@@ -10,7 +10,7 @@ namespace BudgetManager.DataAccess.Db
         public int ID { get; set; }
 
         [Column(Name = "name")]
-        public String name { get; set; }
+        public String Name { get; set; }
 
     }
 }

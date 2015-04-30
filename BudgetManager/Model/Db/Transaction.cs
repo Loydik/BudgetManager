@@ -2,7 +2,7 @@
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     [Table(Name="transactions")]
     public class Transaction

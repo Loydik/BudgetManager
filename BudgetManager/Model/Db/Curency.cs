@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     [Table(Name = "currency")]
     public class Curency

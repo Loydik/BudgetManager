@@ -9,7 +9,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Data.Linq;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     [Database(Name="localdb")]
     public class Database

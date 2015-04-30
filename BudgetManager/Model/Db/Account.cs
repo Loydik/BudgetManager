@@ -2,19 +2,19 @@
 using System.Data.Linq.Mapping;
 using System.Data.Linq;
 
-namespace BudgetManager.DataAccess.Db
+namespace BudgetManager.Model.Db
 {
     [Table(Name="accounts")]
     public class Account
     {
         [Column(IsPrimaryKey = true, Name="account_id", IsDbGenerated=true)]
-        public int ID {get; set;}
+        public int ID {get; private set;}
 
         [Column(Name = "name")]
-        public String Name {get; set;}
+        public String Name {get; private set;}
 
         [Column(Name = "balance")]
-        public decimal Balance { get; set; }
+        public decimal Balance { get; private set; }
 
         
         [Column(Name = "type_id")]
@@ -25,7 +25,7 @@ namespace BudgetManager.DataAccess.Db
         public AccountType AccountType
         {
             get { return _accountType.Entity; }
-            set { _accountType.Entity = value; }
+            private set { _accountType.Entity = value; }
         }
 
 
