@@ -45,6 +45,12 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
+        public String DateToDisplay
+        {
+            get
+            { return _transactionObj.Date.ToString("dd/MM/yyyy"); }
+        }
+
         public String AccountName
         {
             get
@@ -60,6 +66,24 @@ namespace BudgetManager.ViewModel.Transactions
                 _transactionObj.Amount = value;
                 OnPropertyChanged("Amount");
             }
+        }
+
+        public String AmountToDisplay
+        {
+            get
+            {
+                if (this.TransactionType == "Withdrawal")
+                {
+                    return "-" + Amount + " " + CurrencySymbol;
+                }
+                else { return Amount + " " + CurrencySymbol; }
+            }
+        }
+
+        public decimal AccountBalance
+        {
+            get
+            { return _transactionObj.Account.Balance; }
         }
 
         public String CurrencySymbol
@@ -90,6 +114,10 @@ namespace BudgetManager.ViewModel.Transactions
             get { return _transactionObj.TransactionType.Name; }
         }
 
+        public TransactionViewModel()
+        { 
+        
+        }
 
         public TransactionViewModel(Transaction obj)
         {

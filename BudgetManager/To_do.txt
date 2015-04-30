@@ -1,1 +1,8 @@
-﻿Generic Method to convert List int Observable list!
+﻿TO DO:
+IWindow Factory
+
+
+**********************************************************************************************
+DONE:
+
+Generic Method to convert List into Observable list! 

@@ -28,26 +28,10 @@ namespace BudgetManager.ViewModel.Transactions
 
         public TransactionsControlViewModel()
         {
-            init();
+             db = new Database();
+            _allTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(db.Transactions.ToList(), l => new TransactionViewModel(l));//getting data from db and converting into Observable list
         }
 
-        private void init()
-        { 
-            db = new Database();
-            this.createObservableTransactions(db.Transactions.ToList());
-        }
 
-        private void createObservableTransactions(List<Transaction> transactions)
-        {
-            _allTransactions = new ObservableCollection<TransactionViewModel>();
-
-            if (transactions.Count != 0 && transactions != null)
-            {
-                foreach (Transaction transactionObj in transactions)
-                {
-                    _allTransactions.Add(new TransactionViewModel(transactionObj));
-                }
-            }
-        }
     }
 }
