@@ -53,5 +53,11 @@ namespace BudgetManager.Model.Db
         {
             get { return context.GetTable<TransactionType>(); }
         }
+
+        public void Submit()
+        {
+            this.context.SubmitChanges();
+        }
+
     }
 }

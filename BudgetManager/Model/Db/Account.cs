@@ -11,7 +11,7 @@ namespace BudgetManager.Model.Db
         public int ID {get; private set;}
 
         [Column(Name = "name")]
-        public String Name {get; private set;}
+        public String Name {get; set;}
 
         [Column(Name = "balance")]
         public decimal Balance { get; private set; }

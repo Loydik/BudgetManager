@@ -4,6 +4,7 @@
         xmlns:controls="clr-namespace:BudgetManager.View.TransactionsTab"
         xmlns:vm="clr-namespace:BudgetManager.ViewModel.Transactions"
         Title="MainWindow" Height="900" Width="1000">
+    
     <Window.DataContext>
         <vm:TransactionsControlViewModel />
     </Window.DataContext>

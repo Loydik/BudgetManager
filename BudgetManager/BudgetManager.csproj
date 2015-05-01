@@ -77,14 +77,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Managers\AccountsManager.cs" />
+    <Compile Include="Model\Managers\TransactionsManager.cs" />
+    <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionsControlViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionViewModel.cs" />
     <Compile Include="ViewModel\Util\ConversionHelper.cs" />
     <Compile Include="ViewModel\Util\IWindowFactory.cs" />
     <Compile Include="ViewModel\Util\ObservableObject.cs" />
     <Compile Include="ViewModel\Util\ProductionWindowFactory.cs" />
-    <Compile Include="View\TransactionsTab\CreateNewTransaction.xaml.cs">
-      <DependentUpon>CreateNewTransaction.xaml</DependentUpon>
+    <Compile Include="View\TransactionsTab\CreateNewTransactionWindow.xaml.cs">
+      <DependentUpon>CreateNewTransactionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TransactionsTab\TransactionsControl.xaml.cs">
       <DependentUpon>TransactionsControl.xaml</DependentUpon>
@@ -110,7 +114,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\TransactionsTab\CreateNewTransaction.xaml">
+    <Page Include="View\TransactionsTab\CreateNewTransactionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

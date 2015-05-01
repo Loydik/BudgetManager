@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows;
 
 namespace BudgetManager.View.TransactionsTab
 {
@@ -23,6 +24,12 @@ namespace BudgetManager.View.TransactionsTab
         public TransactionsControl()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewTransactionWindow window = new CreateNewTransactionWindow();
+            window.Show();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace BudgetManager.Model.Db
         public int ID { get; set; }
 
         [Column(Name = "name")]
-        public String name { get; set; }
+        public String Name { get; set; }
 
     }
 }

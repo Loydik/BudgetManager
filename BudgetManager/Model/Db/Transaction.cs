@@ -68,6 +68,20 @@ namespace BudgetManager.Model.Db
             get { return _transactionType.Entity; }
             set { _transactionType.Entity = value; }
         }
+
+        //default parameterless constructor
+        public Transaction() { }
+
+        public Transaction(DateTime date, Account acc, decimal amount, Curency currency, Category category, String comments, TransactionType type)
+        {
+            this.Date = date;
+            this.Account = acc;
+            this.Amount = amount;
+            this.Curency = currency;
+            this.Category = category;
+            this.Comments = comments;
+            this.TransactionType = type;
+        }
     }
 }
 

@@ -1,0 +1,64 @@
+﻿<Window x:Class="BudgetManager.View.TransactionsTab.CreateNewTransactionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:BudgetManager.ViewModel.Transactions"
+        Title="CreateNewTransactionWindow" Height="400" Width="500">
+    
+    <Window.DataContext>
+        <vm:CreateNewTransactionViewModel/>
+    </Window.DataContext>
+
+    <Grid Background="Bisque">
+
+        <Grid Background="White" Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--1st Column-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Type"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Date"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Account"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Amount"></TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Category"></TextBlock>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Comments"></TextBlock>
+
+            <!--2nd Column-->
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding TransactionTypes}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedTransactionType}">
+            </ComboBox>
+            <DatePicker Grid.Row="1" Grid.Column="1"></DatePicker>
+            <ComboBox Grid.Row="2" Grid.Column="1"
+                      ItemsSource="{Binding Accounts}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedAccount}">
+            </ComboBox>
+            <TextBox Grid.Row="3" Grid.Column="1" ></TextBox>
+            <ComboBox Grid.Row="4" Grid.Column="1"
+                      ItemsSource="{Binding Categories}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedCategory}">
+            </ComboBox>
+            <TextBox Grid.Row="5" Grid.Column="1" ></TextBox>
+
+            <DockPanel Grid.Row="6" Grid.Column="1" LastChildFill="False">
+                <Button DockPanel.Dock="Left" Content="Add" Width="96" Margin="8"/>
+                <Button DockPanel.Dock="Right" Content="Cancel" Width="89" Margin="8"/>
+            </DockPanel>
+        </Grid>   
+    </Grid>
+
+</Window>

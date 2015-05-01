@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace BudgetManager.View.TransactionsTab
 {
     /// <summary>
-    /// Interaction logic for CreateNewTransaction.xaml
+    /// Interaction logic for CreateNewTransactionWindow.xaml
     /// </summary>
-    public partial class CreateNewTransaction : Window
+    public partial class CreateNewTransactionWindow : Window
     {
-        public CreateNewTransaction()
+        public CreateNewTransactionWindow()
         {
             InitializeComponent();
         }

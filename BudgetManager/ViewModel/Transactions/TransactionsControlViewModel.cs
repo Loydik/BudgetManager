@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using BudgetManager.ViewModel.Util;
 using System.Collections.ObjectModel;
 using BudgetManager.Model.Db;
+using BudgetManager.Model.Managers;
 
 namespace BudgetManager.ViewModel.Transactions
 {
     public class TransactionsControlViewModel : ObservableObject
-    {
+    {   
+        private TransactionsManager _transManager;
         private ObservableCollection<TransactionViewModel> _allTransactions;
-        private Database db;
 
         public ObservableCollection<TransactionViewModel> AllTransactions
         {
@@ -28,8 +29,8 @@ namespace BudgetManager.ViewModel.Transactions
 
         public TransactionsControlViewModel()
         {
-             db = new Database();
-            _allTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(db.Transactions.ToList(), l => new TransactionViewModel(l));//getting data from db and converting into Observable list
+            _transManager = new TransactionsManager();
+            _allTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(_transManager.Transactions, l => new TransactionViewModel(l));//getting data from db and converting into Observable list
         }
 
 
