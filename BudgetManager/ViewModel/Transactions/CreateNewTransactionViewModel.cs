@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BudgetManager.ViewModel.Util;
 using BudgetManager.Model.Managers;
 using BudgetManager.Model.Db;
+using System.Windows.Input;
 
 namespace BudgetManager.ViewModel.Transactions
 {
@@ -18,12 +19,21 @@ namespace BudgetManager.ViewModel.Transactions
         private String _comments;
         private TransactionType _selectedTransactionType;
         private Category _selectedCategory;
+        private String _errorMessage;
+
+        private ICommand _createNewTransactionCommand;
+
 
         public CreateNewTransactionViewModel()
         {
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
+            Date = DateTime.Now;
+            _comments = "";
+            _errorMessage = "You have an error!";
         }
+
+        #region Properties
 
         public List<TransactionType> TransactionTypes
         {
@@ -40,7 +50,6 @@ namespace BudgetManager.ViewModel.Transactions
                 OnPropertyChanged("SelectedTransactionType");
             }
         }
-
 
         public DateTime Date
         {
@@ -102,6 +111,53 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
+        public String ErrorMessage
+        {
+            get
+            { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
+            }
+        }
 
+        #endregion // Properties
+
+
+        #region ICommands
+
+        public ICommand CreateNewTransactionCommand
+        {
+            get
+            {
+                if (_createNewTransactionCommand == null)
+                {
+                    _createNewTransactionCommand = new RelayCommand(
+                        param => CreateNewTransaction(), param => CreateNewTransactionCanExecute()
+                    );
+                }
+                return _createNewTransactionCommand;
+            }
+        }
+
+        public void CreateNewTransaction()
+        {
+            
+            //Transaction newTransaction = new Transaction(Date, SelectedAccount, Amount, _transManager.Currencies.First(), SelectedCategory, Comments, SelectedTransactionType);
+            _transManager.addTransaction(Date, SelectedAccount, Amount, _transManager.Currencies.First(), SelectedCategory, Comments, SelectedTransactionType);
+        }
+
+        public Boolean CreateNewTransactionCanExecute()
+        {
+            
+            if(_amount != 0)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+
+        #endregion
     }
 }

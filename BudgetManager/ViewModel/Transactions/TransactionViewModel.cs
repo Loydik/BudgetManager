@@ -23,7 +23,7 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
-        public int TransactionID
+        public int? TransactionID
         {
             get
             { return _transactionObj.ID; }

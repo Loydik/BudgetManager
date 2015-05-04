@@ -21,7 +21,7 @@ namespace BudgetManager.Model.Db
         private int accountType;
         private EntityRef<AccountType> _accountType = new EntityRef<AccountType>();
 
-        [Association(Name = "FK_Accounts_AccountTypes", IsForeignKey = true, Storage = "_accountType", ThisKey = "accountType")]
+        [Association(Name = "FK_accounts_account_types", IsForeignKey = true, Storage = "_accountType", ThisKey = "accountType")]
         public AccountType AccountType
         {
             get { return _accountType.Entity; }
