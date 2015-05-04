@@ -1,5 +1,5 @@
 # BudgetManager
-A simple personal financtial managing software
+A simple personal financial managing software
 
 TIMELINE:
 
