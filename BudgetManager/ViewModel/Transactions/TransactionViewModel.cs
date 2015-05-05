@@ -74,9 +74,9 @@ namespace BudgetManager.ViewModel.Transactions
             {
                 if (this.TransactionType == "Withdrawal")
                 {
-                    return "-" + Amount + " " + CurrencySymbol;
+                    return "-" + Amount.ToString("F") + " " + CurrencySymbol;
                 }
-                else { return Amount + " " + CurrencySymbol; }
+                else { return Amount.ToString("F") + " " + CurrencySymbol; }
             }
         }
 

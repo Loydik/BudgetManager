@@ -84,24 +84,25 @@
     <Compile Include="Model\Managers\AccountsManager.cs" />
     <Compile Include="Model\Managers\TransactionsManager.cs" />
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
+    <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionsControlViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionViewModel.cs" />
     <Compile Include="ViewModel\Util\ConversionHelper.cs" />
+    <Compile Include="ViewModel\Util\IPageViewModel.cs" />
     <Compile Include="ViewModel\Util\IWindowFactory.cs" />
     <Compile Include="ViewModel\Util\ObservableObject.cs" />
     <Compile Include="ViewModel\Util\ProductionWindowFactory.cs" />
     <Compile Include="ViewModel\Util\RelayCommand.cs" />
+    <Compile Include="View\MainWindow\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TransactionsTab\CreateNewTransactionWindow.xaml.cs">
       <DependentUpon>CreateNewTransactionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TransactionsTab\TransactionsControl.xaml.cs">
       <DependentUpon>TransactionsControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -115,10 +116,10 @@
     <Compile Include="Model\Db\TransactionType.cs" />
     <Compile Include="Model\Db\Util\CategoryObjectFactory.cs" />
     <Compile Include="Model\Db\Util\ICategory.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="View\MainWindow\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TransactionsTab\CreateNewTransactionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

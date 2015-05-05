@@ -10,10 +10,15 @@ using BudgetManager.Model.Managers;
 
 namespace BudgetManager.ViewModel.Transactions
 {
-    public class TransactionsControlViewModel : ObservableObject
+    public class TransactionsControlViewModel : ObservableObject, IPageViewModel
     {   
         private TransactionsManager _transManager;
         private ObservableCollection<TransactionViewModel> _allTransactions;
+
+        public String Name
+        {
+            get { return "Transactions"; }
+        }
 
         public ObservableCollection<TransactionViewModel> AllTransactions
         {
@@ -32,7 +37,6 @@ namespace BudgetManager.ViewModel.Transactions
             _transManager = new TransactionsManager();
             _allTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(_transManager.Transactions, l => new TransactionViewModel(l));//getting data from db and converting into Observable list
         }
-
 
     }
 }

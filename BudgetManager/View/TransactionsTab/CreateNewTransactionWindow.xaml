@@ -1,4 +1,5 @@
 ﻿<Window x:Class="BudgetManager.View.TransactionsTab.CreateNewTransactionWindow"
+        x:Name="CreateNewTransaction"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:BudgetManager.ViewModel.Transactions"
@@ -9,7 +10,7 @@
         <vm:CreateNewTransactionViewModel/>
     </Window.DataContext>
 
-    <Grid Background="Beige" ShowGridLines="True">
+    <Grid Background="Beige">
 
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -60,18 +61,18 @@
                       SelectedValue="{Binding Path=SelectedAccount}"
                       SelectedIndex="0">
             </ComboBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Amount,  UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Amount,  UpdateSourceTrigger=LostFocus, Mode=TwoWay}" ></TextBox>
             <ComboBox Grid.Row="4" Grid.Column="1"
                       ItemsSource="{Binding Categories}"
                       DisplayMemberPath="Name"
                       SelectedValue="{Binding Path=SelectedCategory}"
                       SelectedIndex="0">
             </ComboBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Comments,  UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Comments,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="271" TextWrapping="Wrap" AcceptsReturn="True" ></TextBox>
 
             <DockPanel Grid.Row="6" Grid.Column="1" LastChildFill="False">
-                <Button DockPanel.Dock="Left" Content="Add" Width="96" Margin="8" Command="{Binding CreateNewTransactionCommand}"/>
-                <Button DockPanel.Dock="Right" Content="Cancel" Width="89" Margin="8"/>
+                <Button DockPanel.Dock="Left" Content="Add" Width="96" Margin="8" Command="{Binding CreateNewTransactionCommand}" CommandParameter="{Binding ElementName=CreateNewTransaction}"/>
+                <Button DockPanel.Dock="Right" Content="Cancel" Width="89" Margin="8" Command="{Binding CloseWindowCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=CreateNewTransaction}"/>
             </DockPanel>
         </Grid>
         

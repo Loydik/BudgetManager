@@ -1,9 +1,10 @@
 ﻿TO DO:
 IWindow Factory
-General App Layout
+Retrieve added id
 
 
 **********************************************************************************************
 DONE:
 
 Generic Method to convert List into Observable list! 
+General App Layout

@@ -25,14 +25,14 @@ namespace BudgetManager.Model.Managers
             Currencies = db.Currencies.ToList();
         }
 
-        public void addTransaction(DateTime date, Account acc, decimal amount, Curency currency, Category category, String comments, TransactionType type)
+        public void addTransaction(DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
         {
-                Account newAccount = db.Accounts.Single(n => n.ID == acc.ID);
-                Curency newCurrency = db.Currencies.Single(n => n.ID == currency.ID);
-                Category newCategory = db.Categories.Single(n => n.ID == category.ID);
-                TransactionType newTransType = db.TransactionTypes.Single(n => n.ID == type.ID);
+                Account account = db.Accounts.Single(n => n.ID == accountID);
+                Curency currency = db.Currencies.Single(n => n.ID == currencyID);
+                Category category = db.Categories.Single(n => n.ID == categoryID);
+                TransactionType transType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
 
-                Transaction trans = new Transaction(date, newAccount, amount, newCurrency, newCategory, comments, newTransType);
+                Transaction trans = new Transaction(date, account, amount, currency, category, comments, transType);
                 trans.ID = null;
             
                 db.Transactions.InsertOnSubmit(trans);

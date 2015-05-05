@@ -7,6 +7,7 @@ using BudgetManager.ViewModel.Util;
 using BudgetManager.Model.Managers;
 using BudgetManager.Model.Db;
 using System.Windows.Input;
+using System.Windows;
 
 namespace BudgetManager.ViewModel.Transactions
 {
@@ -22,15 +23,18 @@ namespace BudgetManager.ViewModel.Transactions
         private String _errorMessage;
 
         private ICommand _createNewTransactionCommand;
+        private ICommand _closeWindowCommand;
 
+        private decimal maxAmount;
+        private decimal minAmount;
 
         public CreateNewTransactionViewModel()
         {
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
             Date = DateTime.Now;
-            _comments = "";
-            _errorMessage = "You have an error!";
+            maxAmount = 999999999999999999m;
+            minAmount = -999999999999999999m;
         }
 
         #region Properties
@@ -76,11 +80,9 @@ namespace BudgetManager.ViewModel.Transactions
             get { return _amount; }
             set
             {
-                if (value != 0)
-                {
-                    _amount = value;
+                   _amount = Math.Round(value,2);
                     OnPropertyChanged("Amount");
-                }
+                
             }
         }
 
@@ -134,28 +136,49 @@ namespace BudgetManager.ViewModel.Transactions
                 if (_createNewTransactionCommand == null)
                 {
                     _createNewTransactionCommand = new RelayCommand(
-                        param => CreateNewTransaction(), param => CreateNewTransactionCanExecute()
+                        param => CreateNewTransaction((Window)param), param => CreateNewTransactionCanExecute()
                     );
                 }
                 return _createNewTransactionCommand;
             }
         }
 
-        public void CreateNewTransaction()
+        public void CreateNewTransaction(Window x)
         {
-            
-            //Transaction newTransaction = new Transaction(Date, SelectedAccount, Amount, _transManager.Currencies.First(), SelectedCategory, Comments, SelectedTransactionType);
-            _transManager.addTransaction(Date, SelectedAccount, Amount, _transManager.Currencies.First(), SelectedCategory, Comments, SelectedTransactionType);
+            _transManager.addTransaction(Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            this.CloseWindow(x);
         }
 
         public Boolean CreateNewTransactionCanExecute()
         {
             
-            if(_amount != 0)
+            if(_amount != 0 && minAmount<=_amount && _amount<=maxAmount)
             {
                 return true;
             }
             else { return false; }
+        }
+
+        public ICommand CloseWindowCommand
+        {
+            get
+            {
+                if (_closeWindowCommand == null)
+                {
+                    _closeWindowCommand = new RelayCommand(
+                        param => CloseWindow((Window) param)
+                    );
+                }
+                return _closeWindowCommand;
+            }
+        }
+
+        public void CloseWindow(Window x)
+        {
+            if (x != null)
+            {
+                x.Close();
+            }
         }
 
         #endregion
