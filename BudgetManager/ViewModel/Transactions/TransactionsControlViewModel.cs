@@ -20,6 +20,7 @@ namespace BudgetManager.ViewModel.Transactions
         private ICommand _openCreateNewTransactionWindowCommand;
         private ICommand _refreshCommand;
         private ICommand _deleteTransactionCommand;
+        private ICommand _openEditTransactionWindowCommand;
         private IWindowFactory _windowFactory;
 
         public String Name
@@ -78,6 +79,25 @@ namespace BudgetManager.ViewModel.Transactions
         {
             _transManager.updateTransactions();
             this.init();
+        }
+
+        public ICommand OpenEditTransactionWindowCommand
+        {
+            get
+            {
+                if (_openEditTransactionWindowCommand == null)
+                {
+                    _openEditTransactionWindowCommand = new RelayCommand(
+                        param => _windowFactory.CreateNewWindow(new EditTransactionWindowViewModel((TransactionViewModel)param), new EditTransactionWindow())
+                    );
+                }
+                return _openEditTransactionWindowCommand;
+            }
+        }
+
+        private void OpenEditTransactionWindow(TransactionViewModel model)
+        { 
+            
         }
 
         public ICommand DeleteTransactionCommand

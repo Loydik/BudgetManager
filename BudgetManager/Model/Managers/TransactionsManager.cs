@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BudgetManager.Model.Db;
+using System.Reflection;
 
 namespace BudgetManager.Model.Managers
 {
@@ -42,7 +43,24 @@ namespace BudgetManager.Model.Managers
 
         public void updateTransactions()
         {
+            db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, db.Transactions);
             Transactions = db.Transactions.ToList();
+        }
+
+        public void UpdateTransactionFields(int? id, DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
+        {
+            Transaction entity = db.Transactions.Single(n => n.ID == id);
+            entity.Date = date;
+            entity.Account = db.Accounts.Single(n => n.ID == accountID);
+            entity.Amount = amount;
+            entity.Curency = db.Currencies.Single(n => n.ID == currencyID);
+            entity.Category = db.Categories.Single(n => n.ID == categoryID);
+            entity.TransactionType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
+            entity.Comments = comments;
+            db.SubmitChanges();
+
+            Transactions.Remove(Transactions.Single(n => n.ID == id));
+            Transactions.Add(entity);
         }
 
         public void deleteTransaction(int? id)

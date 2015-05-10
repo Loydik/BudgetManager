@@ -11,8 +11,9 @@ using System.Windows;
 
 namespace BudgetManager.ViewModel.Transactions
 {
-    public class CreateNewTransactionViewModel : ObservableObject
+    public class EditTransactionWindowViewModel : ObservableObject
     {
+
         private AccountsManager _accManager;
         private TransactionsManager _transManager;
         private DateTime _date;
@@ -20,26 +21,30 @@ namespace BudgetManager.ViewModel.Transactions
         private String _comments;
         private TransactionType _selectedTransactionType;
         private Category _selectedCategory;
+        private Account _selectedAccount;
         private String _errorMessage;
-        private ObservableObject _parentVM;
+        private int? _transactionID;
 
-        private ICommand _createNewTransactionCommand;
+        private ICommand _updateTransactionCommand;
         private ICommand _closeWindowCommand;
 
         private decimal maxAmount;
         private decimal minAmount;
 
-        public CreateNewTransactionViewModel()
+
+        public EditTransactionWindowViewModel(TransactionViewModel model)
         {
+            _transactionID = model.TransactionID;
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
-            Date = DateTime.Now;
+            Date = model.Date;
             maxAmount = 999999999999999999m;
             minAmount = -999999999999999999m;
-            SelectedTransactionType = TransactionTypes.FirstOrDefault();
-            SelectedCategory = Categories.FirstOrDefault();
-            SelectedAccount = Accounts.FirstOrDefault();
-
+            Amount = model.Amount;
+            Comments = model.Comments;
+            SelectedTransactionType = _transManager.TransactionTypes.Single(n => n.ID == model.TransactionObj.TransactionType.ID);
+            SelectedAccount = _accManager.Accounts.Single(n => n.ID == model.TransactionObj.Account.ID);
+            SelectedCategory = _transManager.TransactionCategories.Single(n => n.ID == model.TransactionObj.Category.ID);
         }
 
         #region Properties
@@ -76,8 +81,13 @@ namespace BudgetManager.ViewModel.Transactions
         }
 
         public Account SelectedAccount
-        { 
-            get; set; 
+        {
+            get { return _selectedAccount; }
+            set
+            {
+                _selectedAccount = value;
+                OnPropertyChanged("SelectedAccount");
+            }
         }
 
         public decimal Amount
@@ -134,27 +144,28 @@ namespace BudgetManager.ViewModel.Transactions
 
         #region ICommands
 
-        public ICommand CreateNewTransactionCommand
+
+        public ICommand UpdateTransactionCommand
         {
             get
             {
-                if (_createNewTransactionCommand == null)
+                if (_updateTransactionCommand == null)
                 {
-                    _createNewTransactionCommand = new RelayCommand(
-                        param => CreateNewTransaction((Window)param), param => CreateNewTransactionCanExecute()
+                    _updateTransactionCommand = new RelayCommand(
+                        param => UpdateTransaction((Window)param), param => UpdateTransactionCanExecute()
                     );
                 }
-                return _createNewTransactionCommand;
+                return _updateTransactionCommand;
             }
         }
 
-        public void CreateNewTransaction(Window x)
+        public void UpdateTransaction(Window x)
         {
-            _transManager.addTransaction(Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.UpdateTransactionFields(_transactionID, Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
             this.CloseWindow(x);
         }
 
-        public Boolean CreateNewTransactionCanExecute()
+        public Boolean UpdateTransactionCanExecute()
         {
             
             if(_amount != 0 && minAmount<=_amount && _amount<=maxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
@@ -164,6 +175,7 @@ namespace BudgetManager.ViewModel.Transactions
             else { return false; }
         }
 
+        
         public ICommand CloseWindowCommand
         {
             get
@@ -187,5 +199,6 @@ namespace BudgetManager.ViewModel.Transactions
         }
 
         #endregion
+
     }
 }

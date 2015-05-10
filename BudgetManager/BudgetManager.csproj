@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\EditTransactionWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionsControlViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionViewModel.cs" />
     <Compile Include="ViewModel\Util\ConversionHelper.cs" />
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="View\TransactionsTab\CreateNewTransactionWindow.xaml.cs">
       <DependentUpon>CreateNewTransactionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TransactionsTab\EditTransactionWindow.xaml.cs">
+      <DependentUpon>EditTransactionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TransactionsTab\TransactionsControl.xaml.cs">
       <DependentUpon>TransactionsControl.xaml</DependentUpon>
@@ -121,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TransactionsTab\CreateNewTransactionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TransactionsTab\EditTransactionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

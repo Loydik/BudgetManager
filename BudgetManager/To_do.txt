@@ -1,6 +1,8 @@
 ﻿TO DO:
 Proper encapsulation!
 Error Handling
+Transaction Search
+Remove unused usings
 
 **********************************************************************************************
 DONE:
