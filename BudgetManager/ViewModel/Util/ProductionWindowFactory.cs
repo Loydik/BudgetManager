@@ -14,7 +14,7 @@ namespace BudgetManager.ViewModel.Util
         public void CreateNewWindow(ObservableObject viewModel, Window window)
         {
             window.DataContext = viewModel;
-            window.Show();
+            window.ShowDialog();
         }
 
         #endregion

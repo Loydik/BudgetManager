@@ -21,6 +21,7 @@ namespace BudgetManager.ViewModel.Transactions
         private TransactionType _selectedTransactionType;
         private Category _selectedCategory;
         private String _errorMessage;
+        private ObservableObject _parentVM;
 
         private ICommand _createNewTransactionCommand;
         private ICommand _closeWindowCommand;
@@ -35,6 +36,7 @@ namespace BudgetManager.ViewModel.Transactions
             Date = DateTime.Now;
             maxAmount = 999999999999999999m;
             minAmount = -999999999999999999m;
+
         }
 
         #region Properties
@@ -152,7 +154,7 @@ namespace BudgetManager.ViewModel.Transactions
         public Boolean CreateNewTransactionCanExecute()
         {
             
-            if(_amount != 0 && minAmount<=_amount && _amount<=maxAmount)
+            if(_amount != 0 && minAmount<=_amount && _amount<=maxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
             {
                 return true;
             }

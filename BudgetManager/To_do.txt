@@ -1,10 +1,12 @@
 ﻿TO DO:
-IWindow Factory
-Retrieve added id
-
+Proper encapsulation!
+Error Handling
 
 **********************************************************************************************
 DONE:
 
 Generic Method to convert List into Observable list! 
 General App Layout
+IWindow Factory
+ShowDialog() instead of Show()
+Retrieve added id

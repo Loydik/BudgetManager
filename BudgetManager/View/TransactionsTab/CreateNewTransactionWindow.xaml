@@ -59,7 +59,7 @@
                       ItemsSource="{Binding Accounts}"
                       DisplayMemberPath="Name"
                       SelectedValue="{Binding Path=SelectedAccount}"
-                      SelectedIndex="0">
+                      SelectedIndex="1">
             </ComboBox>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Amount,  UpdateSourceTrigger=LostFocus, Mode=TwoWay}" ></TextBox>
             <ComboBox Grid.Row="4" Grid.Column="1"

@@ -33,11 +33,23 @@ namespace BudgetManager.Model.Managers
                 TransactionType transType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
 
                 Transaction trans = new Transaction(date, account, amount, currency, category, comments, transType);
-                trans.ID = null;
             
                 db.Transactions.InsertOnSubmit(trans);
                 db.SubmitChanges();
+
                 Transactions.Add(trans);
+        }
+
+        public void updateTransactions()
+        {
+            Transactions = db.Transactions.ToList();
+        }
+
+        public void deleteTransaction(int? id)
+        {
+            Transaction entity = db.Transactions.Single(n=>n.ID == id);
+            db.Transactions.DeleteOnSubmit(entity);
+            db.SubmitChanges();
         }
 
     }

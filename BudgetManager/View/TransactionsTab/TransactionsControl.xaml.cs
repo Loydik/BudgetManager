@@ -25,11 +25,5 @@ namespace BudgetManager.View.TransactionsTab
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CreateNewTransactionWindow window = new CreateNewTransactionWindow();
-            window.Show();
-        }
     }
 }

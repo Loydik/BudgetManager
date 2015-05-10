@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
-    
-<Grid Background="Beige">
+
+    <Grid Background="Beige">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="16*" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0" Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -22,13 +22,13 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="New" Click="Button_Click"></Button>
-            <Button Grid.Column="1" Content="Edit"></Button>
-            <Button Grid.Column="2" Content="Remove"></Button>
-            <Button Grid.Column="3" Content="Refresh"></Button>
+            <Button Grid.Column="0" Content="New" Command="{Binding OpenCreateNewTransactionWindowCommand}"></Button>
+            <!--<Button Content="Edit" Grid.Column="1"/>
+            <Button Grid.Column="2" Content="Remove"></Button>-->
+            <Button Grid.Column="3" Content="Refresh" Command="{Binding RefreshCommand}"></Button>
         </Grid>
 
-        <DataGrid Grid.Row="2" IsReadOnly="True" VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False" CanUserSortColumns="True" ItemsSource="{Binding AllTransactions, UpdateSourceTrigger=PropertyChanged}" Margin="3">
+        <DataGrid Grid.Row="2" IsReadOnly="True" VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False" CanUserSortColumns="True" ItemsSource="{Binding AllTransactions, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding DateToDisplay}" />
                 <DataGridTextColumn Header="Account" Binding="{Binding AccountName}" />
@@ -49,11 +49,13 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Details" Command="{Binding AddNewCaseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Details" Command="{Binding ShowDetailsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Edit" Command="{Binding OpenEditTransactionWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Delete" Command="{Binding DeleteTransactionCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-        
+
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -68,6 +70,6 @@
             <Button Grid.Column="3" Content="Go"  Margin="5"></Button>
             <Button Grid.Column="4" Content="Show All" Margin="5"></Button>
         </Grid>
-        
+
     </Grid>
 </UserControl>
