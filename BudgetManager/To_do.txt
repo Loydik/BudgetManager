@@ -3,6 +3,10 @@ Proper encapsulation!
 Error Handling
 Transaction Search
 Remove unused usings
+Transactions Coloring!!!
+Accounts tab
+Adding/editing a transaction should update Account Balance!
+Account Currency instead of Transaction Currrency!!!
 
 **********************************************************************************************
 DONE:

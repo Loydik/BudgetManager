@@ -161,7 +161,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         public void UpdateTransaction(Window x)
         {
-            _transManager.UpdateTransactionFields(_transactionID, Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.UpdateTransactionFields(_transactionID, Date, SelectedAccount.ID, Amount, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
             this.CloseWindow(x);
         }
 

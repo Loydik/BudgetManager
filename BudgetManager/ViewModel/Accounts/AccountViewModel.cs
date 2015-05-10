@@ -46,10 +46,26 @@ namespace BudgetManager.ViewModel.Accounts
             { return _accountObj.Balance; }
         }
 
+        public String AccountBalanceToDisplay
+        {
+            get
+            {
+                
+               return AccountBalance.ToString("F") + " " + CurrencySymbol;
+                
+            }
+        }
+
         public String AccountTypeName
         {
             get
             { return _accountObj.AccountType.Name; }
+        }
+
+        public String CurrencySymbol
+        {
+            get
+            { return _accountObj.Curency.Symbol; }
         }
 
         public AccountViewModel(Account obj)

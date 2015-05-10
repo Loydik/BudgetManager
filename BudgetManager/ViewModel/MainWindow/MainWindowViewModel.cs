@@ -7,6 +7,7 @@ using BudgetManager.ViewModel.Util;
 using System.Windows.Input;
 using BudgetManager.ViewModel.Transactions;
 using BudgetManager.ViewModel.Util;
+using BudgetManager.ViewModel.Accounts;
 
 namespace BudgetManager.ViewModel.MainWindow
 {
@@ -49,6 +50,11 @@ namespace BudgetManager.ViewModel.MainWindow
             get { return PageViewModels.SingleOrDefault(n => n.Name == "Transactions"); }
         }
 
+        public IPageViewModel AccountsVM
+        {
+            get { return PageViewModels.SingleOrDefault(n => n.Name == "Accounts"); }
+        }
+
         public IPageViewModel CurrentPageViewModel
         {
             get
@@ -69,6 +75,7 @@ namespace BudgetManager.ViewModel.MainWindow
        {
             // Add available pages
             PageViewModels.Add(new TransactionsControlViewModel());
+            PageViewModels.Add(new AccountsControlViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

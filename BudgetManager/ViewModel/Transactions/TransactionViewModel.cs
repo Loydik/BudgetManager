@@ -74,9 +74,9 @@ namespace BudgetManager.ViewModel.Transactions
             {
                 if (this.TransactionType == "Withdrawal")
                 {
-                    return "-" + Amount.ToString("F") + " " + CurrencySymbol;
+                    return "-" + Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
                 }
-                else { return Amount.ToString("F") + " " + CurrencySymbol; }
+                else { return Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol; } 
             }
         }
 
@@ -86,11 +86,6 @@ namespace BudgetManager.ViewModel.Transactions
             { return _transactionObj.Account.Balance; }
         }
 
-        public String CurrencySymbol
-        {
-            get
-            { return _transactionObj.Curency.Symbol; }
-        }
 
         public String CategoryName
         {

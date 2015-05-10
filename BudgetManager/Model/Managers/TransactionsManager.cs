@@ -33,7 +33,7 @@ namespace BudgetManager.Model.Managers
                 Category category = db.Categories.Single(n => n.ID == categoryID);
                 TransactionType transType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
 
-                Transaction trans = new Transaction(date, account, amount, currency, category, comments, transType);
+                Transaction trans = new Transaction(date, account, amount, category, comments, transType);
             
                 db.Transactions.InsertOnSubmit(trans);
                 db.SubmitChanges();
@@ -47,13 +47,12 @@ namespace BudgetManager.Model.Managers
             Transactions = db.Transactions.ToList();
         }
 
-        public void UpdateTransactionFields(int? id, DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
+        public void UpdateTransactionFields(int? id, DateTime date, int accountID, decimal amount, int categoryID, String comments, int transactionTypeID)
         {
             Transaction entity = db.Transactions.Single(n => n.ID == id);
             entity.Date = date;
             entity.Account = db.Accounts.Single(n => n.ID == accountID);
             entity.Amount = amount;
-            entity.Curency = db.Currencies.Single(n => n.ID == currencyID);
             entity.Category = db.Categories.Single(n => n.ID == categoryID);
             entity.TransactionType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
             entity.Comments = comments;

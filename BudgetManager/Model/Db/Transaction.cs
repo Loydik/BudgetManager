@@ -29,18 +29,6 @@ namespace BudgetManager.Model.Db
         [Column(Name = "amount")]
         public decimal Amount {get; set;}
 
-
-        [Column(Name = "currency_id")]
-        private int currency;
-        private EntityRef<Curency> _currency = new EntityRef<Curency>();
-
-        [Association(Name = "FK_transactions_currency", IsForeignKey = true, Storage = "_currency", ThisKey = "currency")]
-        public Curency Curency
-        {
-            get { return _currency.Entity; }
-            set { _currency.Entity = value; }
-        }
-
         
         [Column(Name = "category_id")]
         private int category;
@@ -69,18 +57,31 @@ namespace BudgetManager.Model.Db
             set { _transactionType.Entity = value; }
         }
 
+        [Column(Name = "account_balance_after")]
+        public decimal? AccountBalanceAfter { get; set; }
+
         //default parameterless constructor
         public Transaction() { }
 
-        public Transaction(DateTime date, Account acc, decimal amount, Curency currency, Category category, String comments, TransactionType type)
+        public Transaction(DateTime date, Account acc, decimal amount, Category category, String comments, TransactionType type)
         {
             this.Date = date;
             this.Account = acc;
             this.Amount = amount;
-            this.Curency = currency;
             this.Category = category;
             this.Comments = comments;
             this.TransactionType = type;
+        }
+
+        public Transaction(DateTime date, Account acc, decimal amount, Category category, String comments, TransactionType type, decimal? accountBalanceAfter)
+        {
+            this.Date = date;
+            this.Account = acc;
+            this.Amount = amount;
+            this.Category = category;
+            this.Comments = comments;
+            this.TransactionType = type;
+            this.AccountBalanceAfter = accountBalanceAfter;
         }
     }
 }

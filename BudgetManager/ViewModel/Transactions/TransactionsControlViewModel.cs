@@ -47,6 +47,12 @@ namespace BudgetManager.ViewModel.Transactions
             _windowFactory = new ProductionWindowFactory();
         }
 
+        private void init()
+        {
+            var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.ID).ToList();
+            AllTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
+        }
+
         public ICommand OpenCreateNewTransactionWindowCommand
         {
             get
@@ -118,13 +124,6 @@ namespace BudgetManager.ViewModel.Transactions
         {
             _transManager.deleteTransaction((int)trans.TransactionID);
             Refresh();
-        }
-
-
-        private void init()
-        {
-            var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.ID).ToList();
-            AllTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
 
       

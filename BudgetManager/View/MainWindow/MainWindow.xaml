@@ -4,6 +4,8 @@
         xmlns:vm="clr-namespace:BudgetManager.ViewModel.MainWindow"
         xmlns:transactionsVW="clr-namespace:BudgetManager.View.TransactionsTab"
         xmlns:transactionsVM="clr-namespace:BudgetManager.ViewModel.Transactions"
+        xmlns:accountsVW="clr-namespace:BudgetManager.View.AccountsTab"
+        xmlns:accountsVM="clr-namespace:BudgetManager.ViewModel.Accounts"
         Title="MainWindow" Height="900" Width="1100">
 
     <Window.DataContext>
@@ -13,6 +15,10 @@
     <Window.Resources>
         <DataTemplate DataType="{x:Type transactionsVM:TransactionsControlViewModel}">
             <transactionsVW:TransactionsControl />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type accountsVM:AccountsControlViewModel}">
+            <accountsVW:AccountsControl/>
         </DataTemplate>
     </Window.Resources>
 
@@ -48,8 +54,9 @@
 
 
             <Button Content="Transactions" Grid.Row="2" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding TransactionsVM}"/>
-                
-                <Button Content="Accounts" Grid.Row="3" Margin="5"/>
+
+            <Button Content="Accounts" Grid.Row="3" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding AccountsVM}"/>
+            
                 <Button Content="Reports" Grid.Row="4" Margin="5"/>
                 <Button Content="Settings" Grid.Row="5" Margin="5"/>
                 <Button Content="About" Grid.Row="6" Margin="5"/>

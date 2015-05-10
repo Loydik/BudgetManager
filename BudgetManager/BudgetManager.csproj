@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Managers\AccountsManager.cs" />
     <Compile Include="Model\Managers\TransactionsManager.cs" />
+    <Compile Include="ViewModel\Accounts\AccountsControlViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
@@ -95,6 +96,9 @@
     <Compile Include="ViewModel\Util\ObservableObject.cs" />
     <Compile Include="ViewModel\Util\ProductionWindowFactory.cs" />
     <Compile Include="ViewModel\Util\RelayCommand.cs" />
+    <Compile Include="View\AccountsTab\AccountsControl.xaml.cs">
+      <DependentUpon>AccountsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
     <Compile Include="Model\Db\TransactionType.cs" />
     <Compile Include="Model\Db\Util\CategoryObjectFactory.cs" />
     <Compile Include="Model\Db\Util\ICategory.cs" />
+    <Page Include="View\AccountsTab\AccountsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

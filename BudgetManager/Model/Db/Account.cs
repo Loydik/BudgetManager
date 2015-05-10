@@ -28,6 +28,17 @@ namespace BudgetManager.Model.Db
             private set { _accountType.Entity = value; }
         }
 
+        [Column(Name = "currency_id")]
+        private int currency;
+        private EntityRef<Curency> _currency = new EntityRef<Curency>();
+
+        [Association(Name = "FK_accounts_currency", IsForeignKey = true, Storage = "_currency", ThisKey = "currency")]
+        public Curency Curency
+        {
+            get { return _currency.Entity; }
+            set { _currency.Entity = value; }
+        }
+
 
     }
 }
