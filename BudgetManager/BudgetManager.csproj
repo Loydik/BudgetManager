@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Accounts\AccountsControlViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\Accounts\CreateNewAccountWindowViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\DeleteAccountDialogWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\EditTransactionWindowViewModel.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="ViewModel\Util\ConversionHelper.cs" />
     <Compile Include="ViewModel\Util\IPageViewModel.cs" />
     <Compile Include="ViewModel\Util\IWindowFactory.cs" />
+    <Compile Include="ViewModel\Util\Mediator.cs" />
+    <Compile Include="ViewModel\Util\MultiDictionary.cs" />
     <Compile Include="ViewModel\Util\ObservableObject.cs" />
     <Compile Include="ViewModel\Util\ProductionWindowFactory.cs" />
     <Compile Include="ViewModel\Util\RelayCommand.cs" />
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="View\AccountsTab\CreateNewAccountWindow.xaml.cs">
       <DependentUpon>CreateNewAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AccountsTab\DeleteAccountDialogWindow.xaml.cs">
+      <DependentUpon>DeleteAccountDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -133,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccountsTab\CreateNewAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AccountsTab\DeleteAccountDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

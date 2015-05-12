@@ -40,5 +40,12 @@ namespace BudgetManager.Model.Managers
             _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Accounts);
             Accounts = _db.Accounts.ToList();
         }
+
+        public void DeleteAccount(int? id)
+        {
+            Account entity = _db.Accounts.Single(n => n.ID == id);
+            _db.Accounts.DeleteOnSubmit(entity);
+            _db.SubmitChanges();
+        }
     }
 }

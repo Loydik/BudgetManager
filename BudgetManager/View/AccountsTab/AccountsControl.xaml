@@ -46,8 +46,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Details" Command="{Binding ShowDetailsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
-                    <MenuItem Header="Edit" Command="{Binding OpenEditTransactionWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
-                    <MenuItem Header="Delete" Command="{Binding DeleteTransactionCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Delete" Command="{Binding DeleteAccountCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},Path=PlacementTarget.SelectedItem}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

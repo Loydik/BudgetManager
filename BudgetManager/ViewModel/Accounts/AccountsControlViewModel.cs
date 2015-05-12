@@ -10,6 +10,7 @@ using BudgetManager.Model.Db;
 using System.Windows.Input;
 using BudgetManager.ViewModel.Accounts;
 using BudgetManager.View.AccountsTab;
+using BudgetManager.ViewModel.Transactions;
 
 namespace BudgetManager.ViewModel.Accounts
 {
@@ -18,9 +19,13 @@ namespace BudgetManager.ViewModel.Accounts
         private AccountsManager _accManager;
         private IWindowFactory _windowFactory;
         private ObservableCollection<AccountViewModel> _allAccounts;
+        private string _deleteAccountConfirmation;
 
         private ICommand _openCreateNewAccountWindowCommand;
         private ICommand _refreshCommand;
+        private ICommand _deleteAccountCommand;
+
+        #region Properties
 
         public String Name
         {
@@ -29,8 +34,7 @@ namespace BudgetManager.ViewModel.Accounts
 
         public ObservableCollection<AccountViewModel> AllAccounts
         {
-            get
-            { return _allAccounts; }
+            get { return _allAccounts; }
             set
             {
                 _allAccounts = value;
@@ -38,12 +42,28 @@ namespace BudgetManager.ViewModel.Accounts
             }
         }
 
+        public String DeleteAccountConfirmation
+        {
+            get { return _deleteAccountConfirmation; }
+            set { _deleteAccountConfirmation = value; RaisePropertyChanged("DeleteAccountConfirmation"); }
+        }
+
+        #endregion
+
+
         #region Construction
         public AccountsControlViewModel()
         {
             _accManager = new AccountsManager();
             Init();
             _windowFactory = new ProductionWindowFactory();
+
+            //register to the mediator for the 
+            //DeleteAccount message
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { DeleteAccountConfirmation = (String) o; }, ViewModelMessages.UserDeleteAccount);
         }
 
         private void Init()
@@ -87,6 +107,33 @@ namespace BudgetManager.ViewModel.Accounts
         {
             _accManager.UpdateAccounts();
             Init();
+        }
+
+
+        public ICommand DeleteAccountCommand
+        {
+            get
+            {
+                if (_deleteAccountCommand == null)
+                {
+                    _deleteAccountCommand = new RelayCommand(
+                        param => DeleteAccount((AccountViewModel)param)
+                    );
+                }
+                return _deleteAccountCommand;
+            }
+        }
+
+        private void DeleteAccount(AccountViewModel acc)
+        {
+            _windowFactory.CreateNewWindow(new DeleteAccountDialogWindowViewModel(), new DeleteAccountDialogWindow());
+
+            if(DeleteAccountConfirmation == "DELETE")
+            {
+                _accManager.DeleteAccount(acc.AccountID);
+                _deleteAccountConfirmation = "";
+                Refresh();
+            }
         }
 
         #endregion

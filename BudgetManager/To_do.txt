@@ -4,7 +4,6 @@ Error Handling
 Transaction Search
 Remove unused usings
 Transactions Coloring!!!
-Accounts tab
 Adding/editing a transaction should update Account Balance!
 Style Datagrid!
 VALIDATION SERVICES!!!
@@ -18,3 +17,8 @@ IWindow Factory
 ShowDialog() instead of Show()
 Retrieve added id
 Account Currency instead of Transaction Currrency!!!
+Accounts tab
+
+
+DESIGN PATTERNS:
+Mediator for ViewModel Communications
