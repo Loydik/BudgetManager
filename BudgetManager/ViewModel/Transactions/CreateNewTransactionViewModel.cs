@@ -26,21 +26,24 @@ namespace BudgetManager.ViewModel.Transactions
         private ICommand _createNewTransactionCommand;
         private ICommand _closeWindowCommand;
 
-        private decimal maxAmount;
-        private decimal minAmount;
+        private const decimal MaxAmount = 999999999999999999m;
+        private const decimal MinAmount = -999999999999999999m;
+
+        #region Construction
 
         public CreateNewTransactionViewModel()
         {
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
             Date = DateTime.Now;
-            maxAmount = 999999999999999999m;
-            minAmount = -999999999999999999m;
             SelectedTransactionType = TransactionTypes.FirstOrDefault();
             SelectedCategory = Categories.FirstOrDefault();
             SelectedAccount = Accounts.FirstOrDefault();
 
         }
+
+        #endregion
+
 
         #region Properties
 
@@ -150,14 +153,14 @@ namespace BudgetManager.ViewModel.Transactions
 
         public void CreateNewTransaction(Window x)
         {
-            _transManager.addTransaction(Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.AddTransaction(Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
             this.CloseWindow(x);
         }
 
         public Boolean CreateNewTransactionCanExecute()
         {
             
-            if(_amount != 0 && minAmount<=_amount && _amount<=maxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
+            if(_amount != 0 && MinAmount<=_amount && _amount<=MaxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
             {
                 return true;
             }

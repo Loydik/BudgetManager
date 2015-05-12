@@ -39,6 +39,20 @@ namespace BudgetManager.Model.Db
             set { _currency.Entity = value; }
         }
 
+        //default parameterless constructor
+        public Account()
+        {
+
+        }
+
+        public Account(string name, decimal balance,  AccountType type, Curency curr)
+        {
+            Name = name;
+            Balance = balance;
+            AccountType = type;
+            Curency = curr;
+        }
+
 
     }
 }

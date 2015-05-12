@@ -1,0 +1,69 @@
+﻿<Window x:Class="BudgetManager.View.AccountsTab.CreateNewAccountWindow"
+        x:Name="CreateNewAccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateNewAccountWindow" Height="400" Width="500">
+
+    <Grid Background="Beige">
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="6*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--ROW 1-->
+        <TextBlock Grid.Row="0" Text="Create New Account" FontWeight="Bold" FontSize="18" Margin="10"></TextBlock>
+
+
+        <!--ROW 2-->
+        <Grid Background="White" Grid.Row="1" Margin="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--1st Column-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Initial Balance"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Account Type"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Currency"></TextBlock>
+
+            <!--2nd Column-->
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Margin="3" ></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Balance,  UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Margin="3" ></TextBox>
+            
+            <ComboBox Grid.Row="2" Grid.Column="1"
+                      ItemsSource="{Binding AccountTypes}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedAccountType}"
+                      Margin="3">
+            </ComboBox>
+            <ComboBox Grid.Row="3" Grid.Column="1"
+                      ItemsSource="{Binding Currencies}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedCurrency}"
+                      Margin="3">
+            </ComboBox>
+
+            <DockPanel Grid.Row="6" Grid.Column="1" LastChildFill="False">
+                <Button DockPanel.Dock="Left" Content="Create" Width="96" Margin="8" Command="{Binding CreateNewAccountCommand}" CommandParameter="{Binding ElementName=CreateNewAccount}"/>
+                <Button DockPanel.Dock="Right" Content="Cancel" Width="89" Margin="8" Command="{Binding CloseWindowCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=CreateNewAccount}"/>
+            </DockPanel>
+        </Grid>
+
+        <!--ROW 3-->
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding ErrorMessage}" FontSize="14" OpacityMask="Crimson" Foreground="#FFE5572C" Margin="10"/>
+
+    </Grid>
+
+</Window>

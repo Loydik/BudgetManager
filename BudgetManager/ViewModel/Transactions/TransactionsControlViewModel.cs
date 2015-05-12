@@ -23,7 +23,7 @@ namespace BudgetManager.ViewModel.Transactions
         private ICommand _openEditTransactionWindowCommand;
         private IWindowFactory _windowFactory;
 
-        public String Name
+        public string Name
         {
             get { return "Transactions"; }
         }
@@ -43,14 +43,14 @@ namespace BudgetManager.ViewModel.Transactions
         public TransactionsControlViewModel()
         {
             _transManager = new TransactionsManager();
-            this.init();
+            this.Init();
             _windowFactory = new ProductionWindowFactory();
         }
 
-        private void init()
+        private void Init()
         {
             var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.ID).ToList();
-            AllTransactions = Util.ConversionHelper.toObservableCollection<TransactionViewModel, Transaction>(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
+            AllTransactions = ConversionHelper.toObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
 
         public ICommand OpenCreateNewTransactionWindowCommand
@@ -83,8 +83,8 @@ namespace BudgetManager.ViewModel.Transactions
 
         private void Refresh()
         {
-            _transManager.updateTransactions();
-            this.init();
+            _transManager.UpdateTransactions();
+            Init();
         }
 
         public ICommand OpenEditTransactionWindowCommand
@@ -101,10 +101,6 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
-        private void OpenEditTransactionWindow(TransactionViewModel model)
-        { 
-            
-        }
 
         public ICommand DeleteTransactionCommand
         {
@@ -122,7 +118,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         private void DeleteTransaction(TransactionViewModel trans)
         {
-            _transManager.deleteTransaction((int)trans.TransactionID);
+            _transManager.DeleteTransaction((int)trans.TransactionID);
             Refresh();
         }
 

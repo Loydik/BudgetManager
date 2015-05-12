@@ -26,7 +26,7 @@ namespace BudgetManager.Model.Managers
             Currencies = db.Currencies.ToList();
         }
 
-        public void addTransaction(DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
+        public void AddTransaction(DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
         {
                 Account account = db.Accounts.Single(n => n.ID == accountID);
                 Curency currency = db.Currencies.Single(n => n.ID == currencyID);
@@ -41,7 +41,7 @@ namespace BudgetManager.Model.Managers
                 Transactions.Add(trans);
         }
 
-        public void updateTransactions()
+        public void UpdateTransactions()
         {
             db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, db.Transactions);
             Transactions = db.Transactions.ToList();
@@ -62,7 +62,7 @@ namespace BudgetManager.Model.Managers
             Transactions.Add(entity);
         }
 
-        public void deleteTransaction(int? id)
+        public void DeleteTransaction(int? id)
         {
             Transaction entity = db.Transactions.Single(n=>n.ID == id);
             db.Transactions.DeleteOnSubmit(entity);

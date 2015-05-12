@@ -22,7 +22,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="New" Command="{Binding OpenCreateNewTransactionWindowCommand}"></Button>
+            <Button Grid.Column="0" Content="New" Command="{Binding OpenCreateNewAccountWindowCommand}"></Button>
             <!--<Button Content="Edit" Grid.Column="1"/>
             <Button Grid.Column="2" Content="Remove"></Button>-->
             <Button Grid.Column="3" Content="Refresh" Command="{Binding RefreshCommand}"></Button>
@@ -52,18 +52,6 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0.4*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            
-        </Grid>
-
-    </Grid>
+     </Grid>
 
 </UserControl>

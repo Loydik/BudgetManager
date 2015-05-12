@@ -14,10 +14,10 @@ namespace BudgetManager.Model.Db
     [Database(Name="BudgetManagerDatabase")]
     public class Database : DataContext
     {
-        static String connectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=" + Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\BudgetManagerDatabase.mdf;Integrated Security=True";  
+        static readonly string ConnectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=" + Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\BudgetManagerDatabase.mdf;Integrated Security=True";  
         
 
-        public Database(): base(connectionString)
+        public Database(): base(ConnectionString)
         {
 
         }

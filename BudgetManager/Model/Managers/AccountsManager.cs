@@ -10,20 +10,35 @@ namespace BudgetManager.Model.Managers
 {
     public class AccountsManager
     {
-        private Database db;
+        private readonly Database _db;
         public List<Account> Accounts { get; private set; }
-        
+        public List<AccountType> AccountTypes { get; private set; }
+        public List<Curency> Currencies { get; private set; }
 
         public AccountsManager()
         {
-            db = new Database();
-            Accounts = db.Accounts.ToList();
+            _db = new Database();
+            Accounts = _db.Accounts.ToList();
+            AccountTypes = _db.AccountTypes.ToList();
+            Currencies = _db.Currencies.ToList();
         }
 
-        public void addAccount(Account acc)
+        public void AddAccount(String name, decimal balance, AccountType type, Curency curr)
         {
-            Accounts.Add(acc);
-            db.Accounts.InsertOnSubmit(acc);
+            var accType = _db.AccountTypes.Single(n => n.ID == type.ID);
+            var currency = _db.Currencies.Single(n => n.ID == curr.ID);
+
+            Account entity = new Account(name, balance, accType, currency);
+
+            Accounts.Add(entity);
+            _db.Accounts.InsertOnSubmit(entity);
+            _db.SubmitChanges();
+        }
+
+        public void UpdateAccounts()
+        {
+            _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Accounts);
+            Accounts = _db.Accounts.ToList();
         }
     }
 }

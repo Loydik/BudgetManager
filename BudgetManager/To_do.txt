@@ -6,7 +6,8 @@ Remove unused usings
 Transactions Coloring!!!
 Accounts tab
 Adding/editing a transaction should update Account Balance!
-Account Currency instead of Transaction Currrency!!!
+Style Datagrid!
+VALIDATION SERVICES!!!
 
 **********************************************************************************************
 DONE:
@@ -16,3 +17,4 @@ General App Layout
 IWindow Factory
 ShowDialog() instead of Show()
 Retrieve added id
+Account Currency instead of Transaction Currrency!!!
