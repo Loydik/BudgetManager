@@ -13,6 +13,7 @@ namespace BudgetManager.Model.Db
         [Column(Name="date")]
         public DateTime Date {get; set;}
 
+        #pragma warning disable 0169
 
         [Column(Name = "account_id")]
         private int account;
@@ -24,11 +25,9 @@ namespace BudgetManager.Model.Db
             get { return _account.Entity; }
             set { _account.Entity = value; }
         }
-
         
         [Column(Name = "amount")]
         public decimal Amount {get; set;}
-
         
         [Column(Name = "category_id")]
         private int category;
@@ -57,6 +56,8 @@ namespace BudgetManager.Model.Db
             set { _transactionType.Entity = value; }
         }
 
+        #pragma warning restore 0169
+
         [Column(Name = "account_balance_after")]
         public decimal? AccountBalanceAfter { get; set; }
 
@@ -73,7 +74,7 @@ namespace BudgetManager.Model.Db
             this.TransactionType = type;
         }
 
-        public Transaction(DateTime date, Account acc, decimal amount, Category category, String comments, TransactionType type, decimal? accountBalanceAfter)
+        public Transaction(DateTime date, Account acc, decimal amount, Category category, String comments, TransactionType type, decimal balanceAfter)
         {
             this.Date = date;
             this.Account = acc;
@@ -81,8 +82,10 @@ namespace BudgetManager.Model.Db
             this.Category = category;
             this.Comments = comments;
             this.TransactionType = type;
-            this.AccountBalanceAfter = accountBalanceAfter;
+            this.AccountBalanceAfter = balanceAfter;
         }
+
+
     }
 }
 

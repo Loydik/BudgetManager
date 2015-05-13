@@ -10,7 +10,7 @@ namespace BudgetManager.Model.Managers
 {
     public class TransactionsManager
     {
-        private Database db;
+        private Database _db;
         public List<Transaction> Transactions { get; private set; }
         public List<TransactionType> TransactionTypes { get; private set; }
         public List<Category> TransactionCategories { get; private set; }
@@ -19,44 +19,42 @@ namespace BudgetManager.Model.Managers
 
         public TransactionsManager()
         {
-            db = new Database();
-            Transactions = db.Transactions.ToList();
-            TransactionTypes = db.TransactionTypes.ToList();
-            TransactionCategories = db.Categories.ToList();
-            Currencies = db.Currencies.ToList();
+            _db = new Database();
+            Transactions = _db.Transactions.ToList();
+            TransactionTypes = _db.TransactionTypes.ToList();
+            TransactionCategories = _db.Categories.ToList();
+            Currencies = _db.Currencies.ToList();
         }
 
-        public void AddTransaction(DateTime date, int accountID, decimal amount, int currencyID, int categoryID, String comments, int transactionTypeID)
+        public void AddTransaction(DateTime date, int accountId, decimal amount, int categoryId, String comments, int transactionTypeId)
         {
-                Account account = db.Accounts.Single(n => n.ID == accountID);
-                Curency currency = db.Currencies.Single(n => n.ID == currencyID);
-                Category category = db.Categories.Single(n => n.ID == categoryID);
-                TransactionType transType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
-
+                Account account = _db.Accounts.Single(n => n.Id == accountId);
+                Category category = _db.Categories.Single(n => n.ID == categoryId);
+                TransactionType transType = _db.TransactionTypes.Single(n => n.ID == transactionTypeId);
                 Transaction trans = new Transaction(date, account, amount, category, comments, transType);
-            
-                db.Transactions.InsertOnSubmit(trans);
-                db.SubmitChanges();
-
+                
+                _db.Transactions.InsertOnSubmit(trans);
+                _db.SubmitChanges();
+                
                 Transactions.Add(trans);
         }
 
         public void UpdateTransactions()
         {
-            db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, db.Transactions);
-            Transactions = db.Transactions.ToList();
+            _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Transactions);
+            Transactions = _db.Transactions.ToList();
         }
 
-        public void UpdateTransactionFields(int? id, DateTime date, int accountID, decimal amount, int categoryID, String comments, int transactionTypeID)
+        public void UpdateTransactionFields(int? id, DateTime date, int accountId, decimal amount, int categoryId, String comments, int transactionTypeId)
         {
-            Transaction entity = db.Transactions.Single(n => n.ID == id);
+            Transaction entity = _db.Transactions.Single(n => n.ID == id);
             entity.Date = date;
-            entity.Account = db.Accounts.Single(n => n.ID == accountID);
+            entity.Account = _db.Accounts.Single(n => n.Id == accountId);
             entity.Amount = amount;
-            entity.Category = db.Categories.Single(n => n.ID == categoryID);
-            entity.TransactionType = db.TransactionTypes.Single(n => n.ID == transactionTypeID);
+            entity.Category = _db.Categories.Single(n => n.ID == categoryId);
+            entity.TransactionType = _db.TransactionTypes.Single(n => n.ID == transactionTypeId);
             entity.Comments = comments;
-            db.SubmitChanges();
+            _db.SubmitChanges();
 
             Transactions.Remove(Transactions.Single(n => n.ID == id));
             Transactions.Add(entity);
@@ -64,9 +62,9 @@ namespace BudgetManager.Model.Managers
 
         public void DeleteTransaction(int? id)
         {
-            Transaction entity = db.Transactions.Single(n=>n.ID == id);
-            db.Transactions.DeleteOnSubmit(entity);
-            db.SubmitChanges();
+            Transaction entity = _db.Transactions.Single(n=>n.ID == id);
+            _db.Transactions.DeleteOnSubmit(entity);
+            _db.SubmitChanges();
         }
 
     }

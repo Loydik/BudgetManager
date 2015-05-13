@@ -8,15 +8,19 @@ namespace BudgetManager.Model.Db
     public class Account
     {
         [Column(IsPrimaryKey = true, Name="account_id", IsDbGenerated=true)]
-        public int ID {get; private set;}
+        public int Id {get; private set;}
 
         [Column(Name = "name")]
         public String Name {get; set;}
 
         [Column(Name = "balance")]
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; set; }
 
-        
+        [Column(Name = "initial_balance")]
+        public decimal InitialBalance { get; private set; }
+
+        #pragma warning disable 0169
+
         [Column(Name = "type_id")]
         private int accountType;
         private EntityRef<AccountType> _accountType = new EntityRef<AccountType>();
@@ -39,6 +43,8 @@ namespace BudgetManager.Model.Db
             set { _currency.Entity = value; }
         }
 
+        #pragma warning restore 0169
+
         //default parameterless constructor
         public Account()
         {
@@ -48,7 +54,8 @@ namespace BudgetManager.Model.Db
         public Account(string name, decimal balance,  AccountType type, Curency curr)
         {
             Name = name;
-            Balance = balance;
+            InitialBalance = balance;
+            Balance = InitialBalance;
             AccountType = type;
             Curency = curr;
         }

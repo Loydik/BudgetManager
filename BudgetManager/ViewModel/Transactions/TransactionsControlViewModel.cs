@@ -16,6 +16,7 @@ namespace BudgetManager.ViewModel.Transactions
     public class TransactionsControlViewModel : ObservableObject, IPageViewModel
     {   
         private TransactionsManager _transManager;
+        private FinancialManager _financialManager;
         private ObservableCollection<TransactionViewModel> _allTransactions;
         private ICommand _openCreateNewTransactionWindowCommand;
         private ICommand _refreshCommand;
@@ -43,13 +44,14 @@ namespace BudgetManager.ViewModel.Transactions
         public TransactionsControlViewModel()
         {
             _transManager = new TransactionsManager();
-            this.Init();
+            _financialManager = new FinancialManager();
+            Init();
             _windowFactory = new ProductionWindowFactory();
         }
 
         private void Init()
         {
-            var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.ID).ToList();
+            var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.Date).ThenByDescending(n=>n.ID).ToList();
             AllTransactions = ConversionHelper.toObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
 
@@ -118,7 +120,12 @@ namespace BudgetManager.ViewModel.Transactions
 
         private void DeleteTransaction(TransactionViewModel trans)
         {
-            _transManager.DeleteTransaction((int)trans.TransactionID);
+            int? accountId = trans.AccountId;
+
+            _transManager.DeleteTransaction(trans.TransactionID);
+            _transManager.UpdateTransactions();
+            _financialManager.UpdateTransactionsAfterBalancesinAccount(accountId, trans.Date, trans.TransactionID);
+            _financialManager.RefreshAccountBalance(accountId);
             Refresh();
         }
 

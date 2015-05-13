@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding DateToDisplay}" />
                 <DataGridTextColumn Header="Account" Binding="{Binding AccountName}" />
                 <DataGridTextColumn Header="Amount" Binding="{Binding AmountToDisplay}"/>
-                <DataGridTextColumn Header="Account Balance" Binding="{Binding AccountBalance}" />
+                <DataGridTextColumn Header="Account Balance" Binding="{Binding AccountBalanceAfter}" />
                 <DataGridTextColumn Header="Category" Binding="{Binding CategoryName}" />
                 <DataGridTextColumn Header="Type" Binding="{Binding TransactionType}" />
                 <DataGridTextColumn Header="Comments" Binding="{Binding Comments}" Width="*" />

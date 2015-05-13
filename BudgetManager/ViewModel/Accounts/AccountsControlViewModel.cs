@@ -126,13 +126,18 @@ namespace BudgetManager.ViewModel.Accounts
 
         private void DeleteAccount(AccountViewModel acc)
         {
-            _windowFactory.CreateNewWindow(new DeleteAccountDialogWindowViewModel(), new DeleteAccountDialogWindow());
-
-            if(DeleteAccountConfirmation == "DELETE")
+            if (acc != null)
             {
-                _accManager.DeleteAccount(acc.AccountID);
-                _deleteAccountConfirmation = "";
-                Refresh();
+
+                _windowFactory.CreateNewWindow(new DeleteAccountDialogWindowViewModel(acc.AccountName),
+                    new DeleteAccountDialogWindow());
+
+                if (DeleteAccountConfirmation == "DELETE")
+                {
+                    _accManager.DeleteAccount(acc.AccountID);
+                    _deleteAccountConfirmation = "";
+                    Refresh();
+                }
             }
         }
 

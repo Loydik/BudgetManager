@@ -26,7 +26,7 @@ namespace BudgetManager.ViewModel.Accounts
         public int AccountID
         {
             get
-            { return _accountObj.ID; }
+            { return _accountObj.Id; }
         }
 
         public String AccountName

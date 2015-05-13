@@ -16,6 +16,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         private AccountsManager _accManager;
         private TransactionsManager _transManager;
+        private FinancialManager _financialManager;
         private DateTime _date;
         private decimal _amount;
         private String _comments;
@@ -37,13 +38,14 @@ namespace BudgetManager.ViewModel.Transactions
             _transactionID = model.TransactionID;
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
+            _financialManager = new FinancialManager();
             Date = model.Date;
             maxAmount = 999999999999999999m;
             minAmount = -999999999999999999m;
             Amount = model.Amount;
             Comments = model.Comments;
             SelectedTransactionType = _transManager.TransactionTypes.Single(n => n.ID == model.TransactionObj.TransactionType.ID);
-            SelectedAccount = _accManager.Accounts.Single(n => n.ID == model.TransactionObj.Account.ID);
+            SelectedAccount = _accManager.Accounts.Single(n => n.Id == model.TransactionObj.Account.Id);
             SelectedCategory = _transManager.TransactionCategories.Single(n => n.ID == model.TransactionObj.Category.ID);
         }
 
@@ -161,7 +163,11 @@ namespace BudgetManager.ViewModel.Transactions
 
         public void UpdateTransaction(Window x)
         {
-            _transManager.UpdateTransactionFields(_transactionID, Date, SelectedAccount.ID, Amount, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.UpdateTransactionFields(_transactionID, Date, SelectedAccount.Id, Amount, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.UpdateTransactions();
+            _financialManager.UpdateTransactionsAfterBalancesinAccount(SelectedAccount.Id, Date, _transactionID);
+            _financialManager.RefreshAccountBalance(SelectedAccount.Id);
+
             this.CloseWindow(x);
         }
 

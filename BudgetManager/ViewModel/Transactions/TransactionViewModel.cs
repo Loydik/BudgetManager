@@ -57,6 +57,11 @@ namespace BudgetManager.ViewModel.Transactions
             { return _transactionObj.Account.Name; }
         }
 
+        public int? AccountId
+        {
+            get { return _transactionObj.Account.Id; }
+        }
+
         public decimal Amount
         {
             get
@@ -80,10 +85,10 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
-        public decimal AccountBalance
+        public decimal? AccountBalanceAfter
         {
             get
-            { return _transactionObj.Account.Balance; }
+            { return _transactionObj.AccountBalanceAfter; }
         }
 
 

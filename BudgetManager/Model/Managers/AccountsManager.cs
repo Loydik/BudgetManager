@@ -15,12 +15,15 @@ namespace BudgetManager.Model.Managers
         public List<AccountType> AccountTypes { get; private set; }
         public List<Curency> Currencies { get; private set; }
 
+        public List<Transaction> Transactions { get; private set; }
+
         public AccountsManager()
         {
             _db = new Database();
             Accounts = _db.Accounts.ToList();
             AccountTypes = _db.AccountTypes.ToList();
             Currencies = _db.Currencies.ToList();
+            Transactions = _db.Transactions.ToList();
         }
 
         public void AddAccount(String name, decimal balance, AccountType type, Curency curr)
@@ -35,17 +38,18 @@ namespace BudgetManager.Model.Managers
             _db.SubmitChanges();
         }
 
+        public void DeleteAccount(int? id)
+        {
+            Account entity = _db.Accounts.Single(n => n.Id == id);
+            _db.Accounts.DeleteOnSubmit(entity);
+            _db.SubmitChanges();
+        }
+
         public void UpdateAccounts()
         {
             _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Accounts);
             Accounts = _db.Accounts.ToList();
         }
 
-        public void DeleteAccount(int? id)
-        {
-            Account entity = _db.Accounts.Single(n => n.ID == id);
-            _db.Accounts.DeleteOnSubmit(entity);
-            _db.SubmitChanges();
-        }
     }
 }

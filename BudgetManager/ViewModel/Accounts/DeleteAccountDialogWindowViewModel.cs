@@ -12,6 +12,7 @@ namespace BudgetManager.ViewModel.Accounts
     public class DeleteAccountDialogWindowViewModel : ObservableObject
     {
         private string _answer;
+        private string _displayMessage;
         private ICommand _closeWindowCommand;
         private ICommand _confirmDeleteAccountCommand;
 
@@ -26,6 +27,20 @@ namespace BudgetManager.ViewModel.Accounts
             }
         }
 
+        public string DisplayMessage
+        {
+            get { return _displayMessage; }
+        }
+
+        public DeleteAccountDialogWindowViewModel()
+        {
+
+        }
+
+        public DeleteAccountDialogWindowViewModel(String accountName)
+        {
+            _displayMessage = "Are you sure you want to delete account \"" + accountName + "\" and all related transactions?";
+        }
 
         public ICommand ConfirmDeleteAccountCommand
         {
@@ -71,6 +86,7 @@ namespace BudgetManager.ViewModel.Accounts
                 return _closeWindowCommand;
             }
         }
+
 
         public void CloseWindow(Window x)
         {

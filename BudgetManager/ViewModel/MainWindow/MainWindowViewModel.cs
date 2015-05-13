@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BudgetManager.ViewModel.Util;
 using System.Windows.Input;
 using BudgetManager.ViewModel.Transactions;
-using BudgetManager.ViewModel.Util;
 using BudgetManager.ViewModel.Accounts;
 
 namespace BudgetManager.ViewModel.MainWindow

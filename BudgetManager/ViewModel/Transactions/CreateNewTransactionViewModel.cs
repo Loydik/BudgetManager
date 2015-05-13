@@ -15,13 +15,13 @@ namespace BudgetManager.ViewModel.Transactions
     {
         private AccountsManager _accManager;
         private TransactionsManager _transManager;
+        private FinancialManager _financialManager;
         private DateTime _date;
         private decimal _amount;
         private String _comments;
         private TransactionType _selectedTransactionType;
         private Category _selectedCategory;
         private String _errorMessage;
-        private ObservableObject _parentVM;
 
         private ICommand _createNewTransactionCommand;
         private ICommand _closeWindowCommand;
@@ -35,6 +35,7 @@ namespace BudgetManager.ViewModel.Transactions
         {
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
+            _financialManager = new FinancialManager();
             Date = DateTime.Now;
             SelectedTransactionType = TransactionTypes.FirstOrDefault();
             SelectedCategory = Categories.FirstOrDefault();
@@ -153,7 +154,16 @@ namespace BudgetManager.ViewModel.Transactions
 
         public void CreateNewTransaction(Window x)
         {
-            _transManager.AddTransaction(Date, SelectedAccount.ID, Amount, 1, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            _transManager.AddTransaction(Date, SelectedAccount.Id, Amount, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
+            var addedTransaction = _transManager.Transactions.Last();
+
+            if (Date < DateTime.Today)
+            {
+                _financialManager.UpdateTransactionsAfterBalancesinAccount(SelectedAccount.Id, Date, addedTransaction.ID);
+            }
+
+            _financialManager.UpdateAccountBalance(SelectedAccount.Id, Amount, SelectedTransactionType, addedTransaction.ID);
+
             this.CloseWindow(x);
         }
 
