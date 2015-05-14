@@ -75,6 +75,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -88,6 +92,8 @@
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\Accounts\CreateNewAccountWindowViewModel.cs" />
     <Compile Include="ViewModel\Accounts\DeleteAccountDialogWindowViewModel.cs" />
+    <Compile Include="ViewModel\Calendar\CalendarControlViewModel.cs" />
+    <Compile Include="ViewModel\Calendar\MonthViewCalendarViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\EditTransactionWindowViewModel.cs" />
@@ -110,6 +116,12 @@
     <Compile Include="View\AccountsTab\DeleteAccountDialogWindow.xaml.cs">
       <DependentUpon>DeleteAccountDialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CalendarTab\CalendarControl.xaml.cs">
+      <DependentUpon>CalendarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CalendarTab\DayNameConverter.cs" />
+    <Compile Include="View\CalendarTab\MonthViewCalendar.cs" />
+    <Compile Include="View\CalendarTab\TransactionsConverter.cs" />
     <Compile Include="View\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -135,6 +147,10 @@
     <Compile Include="Model\Db\TransactionType.cs" />
     <Compile Include="Model\Db\Util\CategoryObjectFactory.cs" />
     <Compile Include="Model\Db\Util\ICategory.cs" />
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AccountsTab\AccountsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccountsTab\DeleteAccountDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CalendarTab\CalendarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +245,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -2,10 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:BudgetManager.ViewModel.MainWindow"
-        xmlns:transactionsVW="clr-namespace:BudgetManager.View.TransactionsTab"
-        xmlns:transactionsVM="clr-namespace:BudgetManager.ViewModel.Transactions"
-        xmlns:accountsVW="clr-namespace:BudgetManager.View.AccountsTab"
-        xmlns:accountsVM="clr-namespace:BudgetManager.ViewModel.Accounts"
+        xmlns:transactionsVw="clr-namespace:BudgetManager.View.TransactionsTab"
+        xmlns:transactionsVm="clr-namespace:BudgetManager.ViewModel.Transactions"
+        xmlns:accountsVw="clr-namespace:BudgetManager.View.AccountsTab"
+        xmlns:accountsVm="clr-namespace:BudgetManager.ViewModel.Accounts"
+        xmlns:calendarVw="clr-namespace:BudgetManager.View.CalendarTab"
+        xmlns:calendarVm="clr-namespace:BudgetManager.ViewModel.Calendar"
         Title="MainWindow" Height="900" Width="1100">
 
     <Window.DataContext>
@@ -13,13 +15,18 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type transactionsVM:TransactionsControlViewModel}">
-            <transactionsVW:TransactionsControl />
+        <DataTemplate DataType="{x:Type transactionsVm:TransactionsControlViewModel}">
+            <transactionsVw:TransactionsControl />
         </DataTemplate>
         
-        <DataTemplate DataType="{x:Type accountsVM:AccountsControlViewModel}">
-            <accountsVW:AccountsControl/>
+        <DataTemplate DataType="{x:Type accountsVm:AccountsControlViewModel}">
+            <accountsVw:AccountsControl/>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type calendarVm:CalendarControlViewModel}">
+            <calendarVw:CalendarControl/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid ShowGridLines="True" Background="Beige">
@@ -50,7 +57,7 @@
             </Grid.RowDefinitions>
 
                 <Button Content="Overview" Margin="5"/>
-                <Button Content="Calendar" Grid.Row="1" Margin="5"/>
+            <Button Content="Calendar" Grid.Row="1" Margin="5"  Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding CalendarVm}"/>
 
 
             <Button Content="Transactions" Grid.Row="2" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding TransactionsVM}"/>
