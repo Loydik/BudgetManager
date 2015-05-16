@@ -8,6 +8,7 @@ using System.Windows.Input;
 using BudgetManager.ViewModel.Transactions;
 using BudgetManager.ViewModel.Accounts;
 using BudgetManager.ViewModel.Calendar;
+using BudgetManager.ViewModel.Reports;
 
 namespace BudgetManager.ViewModel.MainWindow
 {
@@ -45,12 +46,12 @@ namespace BudgetManager.ViewModel.MainWindow
             }
         }
 
-        public IPageViewModel TransactionsVM
+        public IPageViewModel TransactionsVm
         {
             get { return PageViewModels.SingleOrDefault(n => n.Name == "Transactions"); }
         }
 
-        public IPageViewModel AccountsVM
+        public IPageViewModel AccountsVm
         {
             get { return PageViewModels.SingleOrDefault(n => n.Name == "Accounts"); }
         }
@@ -58,6 +59,11 @@ namespace BudgetManager.ViewModel.MainWindow
         public IPageViewModel CalendarVm
         {
             get { return PageViewModels.SingleOrDefault(n => n.Name == "Calendar"); }
+        }
+
+        public IPageViewModel ReportsVm
+        {
+            get { return PageViewModels.SingleOrDefault(n => n.Name == "Reports"); }
         }
 
         public IPageViewModel CurrentPageViewModel
@@ -81,7 +87,8 @@ namespace BudgetManager.ViewModel.MainWindow
             // Add available pages
             PageViewModels.Add(new TransactionsControlViewModel());
             PageViewModels.Add(new AccountsControlViewModel());
-            PageViewModels.Add(new CalendarControlViewModel()); 
+            PageViewModels.Add(new CalendarControlViewModel());
+            PageViewModels.Add(new ReportsControlViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

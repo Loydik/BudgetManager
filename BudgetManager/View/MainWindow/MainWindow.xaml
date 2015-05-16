@@ -8,6 +8,8 @@
         xmlns:accountsVm="clr-namespace:BudgetManager.ViewModel.Accounts"
         xmlns:calendarVw="clr-namespace:BudgetManager.View.CalendarTab"
         xmlns:calendarVm="clr-namespace:BudgetManager.ViewModel.Calendar"
+        xmlns:reportsVw="clr-namespace:BudgetManager.View.ReportsTab"
+        xmlns:reportsVm="clr-namespace:BudgetManager.ViewModel.Reports"
         Title="MainWindow" Height="900" Width="1100">
 
     <Window.DataContext>
@@ -27,9 +29,13 @@
             <calendarVw:CalendarControl/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type reportsVm:ReportsControlViewModel}">
+            <reportsVw:ReportsControl/>
+        </DataTemplate>
+
     </Window.Resources>
 
-    <Grid ShowGridLines="True" Background="Beige">
+    <Grid Background="Beige">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="5*"/>
@@ -41,7 +47,7 @@
         </Grid.RowDefinitions>
 
         <!--Application Header-->
-        <TextBlock Grid.ColumnSpan="2" Text="Money Manager PLUS" HorizontalAlignment="Center" Margin="5" FontSize="30" FontWeight="Bold"/>
+        <TextBlock Grid.ColumnSpan="2" Text="Money Manager PLUS" HorizontalAlignment="Center" Margin="5" FontSize="30"/>
         <Separator Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
 
         <!--Buttons Panel-->
@@ -60,11 +66,11 @@
             <Button Content="Calendar" Grid.Row="1" Margin="5"  Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding CalendarVm}"/>
 
 
-            <Button Content="Transactions" Grid.Row="2" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding TransactionsVM}"/>
+            <Button Content="Transactions" Grid.Row="2" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding TransactionsVm}"/>
 
-            <Button Content="Accounts" Grid.Row="3" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding AccountsVM}"/>
-            
-                <Button Content="Reports" Grid.Row="4" Margin="5"/>
+            <Button Content="Accounts" Grid.Row="3" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding AccountsVm}"/>
+
+            <Button Content="Reports" Grid.Row="4" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding ReportsVm}"/>
                 <Button Content="Settings" Grid.Row="5" Margin="5"/>
                 <Button Content="About" Grid.Row="6" Margin="5"/>
 

@@ -4,11 +4,11 @@ Error Handling
 Transaction Search
 Remove unused usings
 Transactions Coloring!!!
-Adding/editing a transaction should update Account Balance!
 Style Datagrid!
 VALIDATION SERVICES!!!
 REFRESH COMMAND by Mediator!!!
 NO FUTURE DATES!
+
 **********************************************************************************************
 DONE:
 
@@ -19,7 +19,7 @@ ShowDialog() instead of Show()
 Retrieve added id
 Account Currency instead of Transaction Currrency!!!
 Accounts tab
-
+Adding/editing a transaction should update Account Balance!
 **********************************************************************************************
 DESIGN PATTERNS:
 Mediator for ViewModel Communications

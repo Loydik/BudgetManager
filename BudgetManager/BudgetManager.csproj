@@ -54,6 +54,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.6\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
     </Reference>
@@ -87,7 +91,11 @@
     </ApplicationDefinition>
     <Compile Include="Model\Managers\AccountsManager.cs" />
     <Compile Include="Model\Managers\FinancialManager.cs" />
+    <Compile Include="Model\Managers\ReportsManager.cs" />
     <Compile Include="Model\Managers\TransactionsManager.cs" />
+    <Compile Include="Model\ReportGenerators\PdfReportGenerator.cs" />
+    <Compile Include="Model\ReportGenerators\ReportGenerator.cs" />
+    <Compile Include="Model\ReportGenerators\TimePeriod.cs" />
     <Compile Include="ViewModel\Accounts\AccountsControlViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\Accounts\CreateNewAccountWindowViewModel.cs" />
@@ -95,6 +103,7 @@
     <Compile Include="ViewModel\Calendar\CalendarControlViewModel.cs" />
     <Compile Include="ViewModel\Calendar\MonthViewCalendarViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Reports\ReportsControlViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\EditTransactionWindowViewModel.cs" />
     <Compile Include="ViewModel\Transactions\TransactionsControlViewModel.cs" />
@@ -124,6 +133,9 @@
     <Compile Include="View\CalendarTab\TransactionsConverter.cs" />
     <Compile Include="View\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportsTab\ReportsControl.xaml.cs">
+      <DependentUpon>ReportsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TransactionsTab\CreateNewTransactionWindow.xaml.cs">
       <DependentUpon>CreateNewTransactionWindow.xaml</DependentUpon>
@@ -168,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportsTab\ReportsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,7 +261,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\ReportGenerators\pdf\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

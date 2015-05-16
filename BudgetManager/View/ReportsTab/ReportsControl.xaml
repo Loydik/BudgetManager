@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="BudgetManager.View.ReportsTab.ReportsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+
+    <Grid Background="Beige">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--ROW 1-->
+        <TextBlock Grid.Row="0" Text="Generate a Report"  FontSize="24" Margin="10"></TextBlock>
+
+
+        <!--ROW 2-->
+        <Grid Background="White" Grid.Row="1" Margin="60,0,60,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--1st Column-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Accounts"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Output Format"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Start Date"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="End Date"></TextBlock>
+
+            <!--2nd Column-->
+            
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding Accounts}"
+                      DisplayMemberPath="AccountName"
+                      SelectedValue="{Binding Path=SelectedAccount}"
+                      Margin="3">
+            </ComboBox>
+            
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                      ItemsSource="{Binding Formats}"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding Path=SelectedFormat}"
+                      Margin="3">
+            </ComboBox>
+
+            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="3" ></DatePicker>
+            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="3"></DatePicker>
+
+            <DockPanel Grid.Row="5" Grid.Column="1" LastChildFill="False">
+                <Button DockPanel.Dock="Right" Content="Generate" Width="89" Margin="8" Command="{Binding GenerateReportCommand, Mode=OneWay}"/>
+            </DockPanel>
+        </Grid>
+
+        <!--ROW 3-->
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding ErrorMessage}" FontSize="14" OpacityMask="Crimson" Foreground="#FFE5572C" Margin="10"/>
+
+    </Grid>
+
+</UserControl>
