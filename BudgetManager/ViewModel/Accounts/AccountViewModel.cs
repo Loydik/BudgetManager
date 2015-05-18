@@ -73,6 +73,7 @@ namespace BudgetManager.ViewModel.Accounts
             this._accountObj = obj;
         }
 
-       
+        
+
     }
 }

@@ -11,14 +11,13 @@ namespace BudgetManager.ViewModel.Util
     {
 
         //generic method to convert list of IEnumerable items into observable list
-        public static ObservableCollection<T> toObservableCollection<T, U>(IEnumerable<U> original, Func<U,T> del) where T : ObservableObject
-                                                                                          
+        public static ObservableCollection<T> ToObservableCollection<T, TU>(IEnumerable<TU> original, Func<TU,T> del) where T : ObservableObject                                                                              
         {
             ObservableCollection<T> observable = new ObservableCollection<T>();
 
             if (original.Count() != 0 && original != null)
             {
-                foreach (U obj in original)
+                foreach (TU obj in original)
                 {
                     observable.Add(del(obj));
                 }

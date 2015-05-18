@@ -8,7 +8,7 @@ Style Datagrid!
 VALIDATION SERVICES!!!
 REFRESH COMMAND by Mediator!!!
 NO FUTURE DATES!
-
+Linq to SQL Repository Caching 
 **********************************************************************************************
 DONE:
 

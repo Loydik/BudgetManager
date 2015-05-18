@@ -9,6 +9,6 @@ namespace BudgetManager.Model.ReportGenerators
 {
     public abstract class ReportGenerator
     {
-        public abstract void Generate(TimePeriod timePeriod, List<Account> accounts);
+        public abstract void Generate(TimePeriod timePeriod, List<Account> accounts, string filename);
     }
 }

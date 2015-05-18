@@ -68,7 +68,7 @@ namespace BudgetManager.ViewModel.Accounts
 
         private void Init()
         {
-            AllAccounts = ConversionHelper.toObservableCollection(_accManager.Accounts.ToList(), l => new AccountViewModel(l));//getting data from manager and converting into Observable list
+            AllAccounts = ConversionHelper.ToObservableCollection(_accManager.Accounts.ToList(), l => new AccountViewModel(l));//getting data from manager and converting into Observable list
         }
 
         #endregion //Construction

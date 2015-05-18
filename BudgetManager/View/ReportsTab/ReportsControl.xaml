@@ -41,19 +41,27 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Text="End Date"></TextBlock>
 
             <!--2nd Column-->
-            
-            <ComboBox Grid.Row="0" Grid.Column="1"
+
+            <DockPanel Grid.Row="0" Grid.Column="1">
+                <ComboBox DockPanel.Dock="Left"
                       ItemsSource="{Binding Accounts}"
                       DisplayMemberPath="AccountName"
                       SelectedValue="{Binding Path=SelectedAccount}"
-                      Margin="3">
-            </ComboBox>
-            
+                      IsEnabled="{Binding Path=ComboboxIsEnabled}"
+                      Margin="3" Width="237">
+                </ComboBox>
+                <TextBlock Text="Select All Accounts" Margin="8"></TextBlock>
+                <CheckBox DockPanel.Dock="Right" Margin="10" IsChecked="{Binding Path=AllAccountsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    
+                </CheckBox>
+            </DockPanel>
             <ComboBox Grid.Row="1" Grid.Column="1"
-                      ItemsSource="{Binding Formats}"
-                      DisplayMemberPath="Name"
-                      SelectedValue="{Binding Path=SelectedFormat}"
+                      ItemsSource="{Binding ReportFormats}"
+                      DisplayMemberPath="Value"
+                      SelectedValuePath="Key"
+                      SelectedValue="{Binding Path=SelectedFormatKey}"
                       Margin="3">
+                
             </ComboBox>
 
             <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="3" ></DatePicker>

@@ -35,7 +35,7 @@ namespace BudgetManager.ViewModel.Calendar
         private void Init()
         {
             var sortedTransactions = _transactionsManager.Transactions.OrderBy(n => n.Date).ToList();
-            Transactions = ConversionHelper.toObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
+            Transactions = ConversionHelper.ToObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BudgetManager.Model.Managers
         public AccountsManager()
         {
             _db = new Database();
-            Accounts = _db.Accounts.ToList();
+            UpdateAccounts();
             AccountTypes = _db.AccountTypes.ToList();
             Currencies = _db.Currencies.ToList();
             Transactions = _db.Transactions.ToList();

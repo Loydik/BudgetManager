@@ -13,45 +13,86 @@ using BudgetManager.Model.Managers;
 
 namespace BudgetManager.Model.ReportGenerators
 {
-    class PdfReportGenerator : ReportGenerator
+    internal class PdfReportGenerator : ReportGenerator
     {
         private ReportsManager _reportsManager;
+        //private String _filePath;
 
         public PdfReportGenerator()
         {
             _reportsManager = new ReportsManager();
+            //_filePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Model\\ReportGenerators\\pdf";
         }
 
-        public override void Generate(TimePeriod timePeriod, List<Account> accounts)
+        public override void Generate(TimePeriod timePeriod, List<Account> accounts, String filename)
         {
             var doc1 = new Document();
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Model\\ReportGenerators\\pdf";
-            //var timePeriod = timePeriods.First();
 
             try
             {
-                PdfWriter.GetInstance(doc1, new FileStream(path + "/Doc1.pdf", FileMode.Create));
+                PdfWriter.GetInstance(doc1, new FileStream(filename, FileMode.Create));
                 doc1.Open();
 
                 foreach (Account acc in accounts)
                 {
+                    var totalIncome = _reportsManager.GetTotalIncomeOfAccount(acc.Id, timePeriod);
+                    var totalSpendings = _reportsManager.GetTotalSpendingsOfAccount(acc.Id, timePeriod);
+                    string startDate = timePeriod.StartDate.Date.ToString("d");
+                    string endDate = timePeriod.EndDate.Date.ToString("d");
+                    var startingBalance = _reportsManager.GetInitialAccountBalanceAtDate(acc.Id, timePeriod.StartDate);
+                    var finalBalance = _reportsManager.GetFinalAccountBalanceAtDate(acc.Id, timePeriod.EndDate);
+                    string currencySymbol = " " + acc.Curency.Symbol;
+
+                    List<Category> categories = _reportsManager.GetUsedCategories(acc.Id, timePeriod);
+
                     Paragraph p = new Paragraph();
-                    Phrase ph1 = new Phrase("Totals for account " + acc.Name);
-                    Phrase ph2 = new Phrase("Total spendings:" + _reportsManager.GetTotalSpendingsOfAccount(acc.Id));
+                    Phrase ph1 = new Phrase();
+
+                    Chunk ch1 = new Chunk("Totals for account " + acc.Name + "\n");
+                    Chunk ch2 = new Chunk("Time period from " + startDate + " to " + endDate + "\n");
+                    Chunk ch3 = new Chunk("Total spendings: " + totalSpendings + currencySymbol + "\n");
+                    Chunk ch4 = new Chunk("Total income: " + totalIncome + currencySymbol + "\n");
+                    Chunk ch5 = new Chunk("Starting balance at " + startDate + " : " + startingBalance + currencySymbol + "\n");
+                    Chunk ch6 = new Chunk("Final balance at " + endDate + " : " + finalBalance + currencySymbol + "\n \n \n");
+
+                    ph1.Add(ch1);
+                    ph1.Add(ch2);
+                    ph1.Add(ch3);
+                    ph1.Add(ch4);
+                    ph1.Add(ch5);
+                    ph1.Add(ch6);
 
                     p.Add(ph1);
+
+                    Phrase ph2 = new Phrase();
+                    Chunk ch7 = new Chunk("Totals by Categories: \n");
+                    ph2.Add(ch7);
+
+                    foreach (var category in categories)
+                    {
+                        Chunk ch8 = new Chunk("Totals for: " + category.Name + "\n");
+                        Chunk ch9 = new Chunk(" Income: " + _reportsManager.GetTotalIncomeOfAccount(acc.Id, timePeriod, category) + currencySymbol + "\n");
+                        Chunk ch10 = new Chunk(" Spendings: " + _reportsManager.GetTotalSpendingsOfAccount(acc.Id, timePeriod, category) + currencySymbol + "\n\n");
+
+                        ph2.Add(ch8);
+                        ph2.Add(ch9);
+                        ph2.Add(ch10);
+                    }
+
                     p.Add(ph2);
+
+                    doc1.Add(p);
                 }
 
 
             }
             catch (DocumentException dex)
             {
-                throw (dex);
+                throw;
             }
             catch (IOException ioex)
             {
-                throw (ioex);
+                throw;
             }
             finally
             {
@@ -59,6 +100,5 @@ namespace BudgetManager.Model.ReportGenerators
             }
 
         }
-
     }
 }

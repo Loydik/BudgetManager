@@ -52,7 +52,7 @@ namespace BudgetManager.ViewModel.Transactions
         private void Init()
         {
             var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.Date).ThenByDescending(n=>n.ID).ToList();
-            AllTransactions = ConversionHelper.toObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
+            AllTransactions = ConversionHelper.ToObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
 
         public ICommand OpenCreateNewTransactionWindowCommand
