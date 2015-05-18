@@ -84,11 +84,11 @@ namespace BudgetManager.Model.ReportGenerators
 
 
             }
-            catch (DocumentException dex)
+            catch (DocumentException)
             {
                 //to do later 
             }
-            catch (IOException ioex)
+            catch (IOException)
             {
                //to do later 
             }

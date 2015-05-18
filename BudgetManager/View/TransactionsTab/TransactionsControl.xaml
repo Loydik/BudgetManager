@@ -28,7 +28,7 @@
             <Button Grid.Column="3" Content="Refresh" Command="{Binding RefreshCommand}"></Button>
         </Grid>
 
-        <DataGrid Grid.Row="2" IsReadOnly="True" VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False" CanUserSortColumns="True" ItemsSource="{Binding AllTransactions, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="3">
+        <DataGrid Grid.Row="2" IsReadOnly="True" VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False" CanUserSortColumns="True" ItemsSource="{Binding TransactionsToDisplay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="2,0,4,6">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding DateToDisplay}" />
                 <DataGridTextColumn Header="Account" Binding="{Binding AccountName}" />
@@ -56,19 +56,24 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0.4*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition  />
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.7*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Search:" Grid.Column="1"  Margin="7" FontSize="15"></TextBlock>
-            <TextBox Grid.Column="2" Margin="5"></TextBox>
-            <Button Grid.Column="3" Content="Go"  Margin="5"></Button>
-            <Button Grid.Column="4" Content="Show All" Margin="5"></Button>
+            <TextBlock Text="Search in:" Grid.Column="0"  Margin="7" FontSize="15"></TextBlock>
+            <ComboBox  Grid.Column="1" Margin="5"
+                       ItemsSource="{Binding FilterTypes}"
+                       SelectedValue="{Binding Path=SelectedFilterType}">
+            </ComboBox>
+
+            <TextBox Grid.Column="2" Text="{Binding FilterString,  UpdateSourceTrigger=PropertyChanged}" Margin="7"></TextBox>
+            <Button Grid.Column="3" Content="Go" Margin="5" Command="{Binding SearchTransactionsCommand}"></Button>
+            <Button Grid.Column="4" Content="Show All" Margin="5" Command="{Binding ShowAllTransactionsCommand}"></Button>
         </Grid>
 
     </Grid>

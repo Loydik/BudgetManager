@@ -18,11 +18,19 @@ namespace BudgetManager.ViewModel.Transactions
         private TransactionsManager _transManager;
         private FinancialManager _financialManager;
         private ObservableCollection<TransactionViewModel> _allTransactions;
+        private ObservableCollection<TransactionViewModel> _transactionsToDisplay;
+        private List<String> _filterTypes;
+        private string _selectedFilterType;
+        private string _filterString;
         private ICommand _openCreateNewTransactionWindowCommand;
         private ICommand _refreshCommand;
         private ICommand _deleteTransactionCommand;
         private ICommand _openEditTransactionWindowCommand;
         private IWindowFactory _windowFactory;
+        private ICommand _searchTransactionsCommand;
+        private ICommand _showAllTransactionsCommand;
+
+        #region Properties
 
         public string Name
         {
@@ -31,14 +39,55 @@ namespace BudgetManager.ViewModel.Transactions
 
         public ObservableCollection<TransactionViewModel> AllTransactions
         {
-            get
-            { return _allTransactions; }
+            get { return _allTransactions; }
             set
             {
                 _allTransactions = value;
                 OnPropertyChanged("AllTransactions");
             }
         }
+
+        public ObservableCollection<TransactionViewModel> TransactionsToDisplay
+        {
+            get { return _transactionsToDisplay; }
+            set
+            {
+                _transactionsToDisplay = value;
+                OnPropertyChanged("TransactionsToDisplay");
+            }
+        }
+
+        public List<String> FilterTypes
+        {
+            get { return _filterTypes; }
+            set
+            {
+                _filterTypes = value;
+                OnPropertyChanged("FilterTypes");
+            }
+        }
+
+        public String SelectedFilterType
+        {
+            get { return _selectedFilterType; }
+            set
+            {
+                _selectedFilterType = value;
+                OnPropertyChanged("SelectedFilterType");
+            }
+        }
+
+        public String FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+            }
+        }
+
+        #endregion
 
 
         public TransactionsControlViewModel()
@@ -47,6 +96,9 @@ namespace BudgetManager.ViewModel.Transactions
             _financialManager = new FinancialManager();
             Init();
             _windowFactory = new ProductionWindowFactory();
+            _filterTypes = new List<string>(){"Accounts", "Categories", "Comments"};
+            _selectedFilterType = _filterTypes.FirstOrDefault();
+            TransactionsToDisplay = AllTransactions;
         }
 
         private void Init()
@@ -55,6 +107,8 @@ namespace BudgetManager.ViewModel.Transactions
             AllTransactions = ConversionHelper.ToObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
         }
 
+        #region ICommands
+
         public ICommand OpenCreateNewTransactionWindowCommand
         {
             get
@@ -62,8 +116,10 @@ namespace BudgetManager.ViewModel.Transactions
                 if (_openCreateNewTransactionWindowCommand == null)
                 {
                     _openCreateNewTransactionWindowCommand = new RelayCommand(
-                        param => _windowFactory.CreateNewWindow(new CreateNewTransactionViewModel(), new CreateNewTransactionWindow())//, param => CreateNewTransactionCanExecute()
-                    );
+                        param =>
+                            _windowFactory.CreateNewWindow(new CreateNewTransactionViewModel(),
+                                new CreateNewTransactionWindow()) //, param => CreateNewTransactionCanExecute()
+                        );
                 }
                 return _openCreateNewTransactionWindowCommand;
             }
@@ -77,7 +133,7 @@ namespace BudgetManager.ViewModel.Transactions
                 {
                     _refreshCommand = new RelayCommand(
                         param => Refresh()
-                    );
+                        );
                 }
                 return _refreshCommand;
             }
@@ -96,8 +152,11 @@ namespace BudgetManager.ViewModel.Transactions
                 if (_openEditTransactionWindowCommand == null)
                 {
                     _openEditTransactionWindowCommand = new RelayCommand(
-                        param => _windowFactory.CreateNewWindow(new EditTransactionWindowViewModel((TransactionViewModel)param), new EditTransactionWindow())
-                    );
+                        param =>
+                            _windowFactory.CreateNewWindow(
+                                new EditTransactionWindowViewModel((TransactionViewModel) param),
+                                new EditTransactionWindow())
+                        );
                 }
                 return _openEditTransactionWindowCommand;
             }
@@ -111,8 +170,8 @@ namespace BudgetManager.ViewModel.Transactions
                 if (_deleteTransactionCommand == null)
                 {
                     _deleteTransactionCommand = new RelayCommand(
-                        param => DeleteTransaction((TransactionViewModel)param)
-                    );
+                        param => DeleteTransaction((TransactionViewModel) param)
+                        );
                 }
                 return _deleteTransactionCommand;
             }
@@ -129,7 +188,75 @@ namespace BudgetManager.ViewModel.Transactions
             Refresh();
         }
 
-      
+        #endregion
+
+        public ICommand SearchTransactionsCommand
+        {
+             get
+            {
+                if (_searchTransactionsCommand == null)
+                {
+                    _searchTransactionsCommand = new RelayCommand(
+                        param => SearchTransactions(), param => SearchTransactionsCanExecute()
+                        );
+                }
+                return _searchTransactionsCommand;
+            }
+        }
+
+        private void SearchTransactions()
+        {
+            if (_selectedFilterType == "Accounts")
+            {
+                TransactionsToDisplay = AllTransactions.Where(n => n.AccountName.Contains(FilterString)).ToList().ToObservableCollection();
+                
+            } 
+            else if (_selectedFilterType == "Categories")
+            {
+                TransactionsToDisplay = AllTransactions.Where(n => n.CategoryName.Contains(FilterString)).ToList().ToObservableCollection();
+            }
+            else if (_selectedFilterType == "Comments")
+            {
+                try
+                {
+                    TransactionsToDisplay = AllTransactions.Where(n => n.Comments.Contains(FilterString)).ToList().ToObservableCollection();
+                }
+                catch (NullReferenceException)
+                {
+                    TransactionsToDisplay = null;
+                }
+            }
+        }
+
+        private bool SearchTransactionsCanExecute()
+        {
+            if (!string.IsNullOrEmpty(_filterString))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public ICommand ShowAllTransactionsCommand
+        {
+            get
+            {
+                if (_showAllTransactionsCommand == null)
+                {
+                    _showAllTransactionsCommand = new RelayCommand(
+                        param => ShowAllTransactions()
+                        );
+                }
+                return _showAllTransactionsCommand;
+            }
+        }
+
+        private void ShowAllTransactions()
+        {
+            TransactionsToDisplay = AllTransactions;
+        }
+
 
     }
 }
