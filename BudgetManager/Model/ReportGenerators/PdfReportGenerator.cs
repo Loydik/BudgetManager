@@ -16,12 +16,10 @@ namespace BudgetManager.Model.ReportGenerators
     internal class PdfReportGenerator : ReportGenerator
     {
         private ReportsManager _reportsManager;
-        //private String _filePath;
 
         public PdfReportGenerator()
         {
             _reportsManager = new ReportsManager();
-            //_filePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Model\\ReportGenerators\\pdf";
         }
 
         public override void Generate(TimePeriod timePeriod, List<Account> accounts, String filename)
@@ -88,11 +86,11 @@ namespace BudgetManager.Model.ReportGenerators
             }
             catch (DocumentException dex)
             {
-                throw;
+                //to do later 
             }
             catch (IOException ioex)
             {
-                throw;
+               //to do later 
             }
             finally
             {
