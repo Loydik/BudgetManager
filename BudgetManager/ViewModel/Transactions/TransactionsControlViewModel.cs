@@ -143,6 +143,7 @@ namespace BudgetManager.ViewModel.Transactions
         {
             _transManager.UpdateTransactions();
             Init();
+            TransactionsToDisplay = AllTransactions;
         }
 
         public ICommand OpenEditTransactionWindowCommand
@@ -190,6 +191,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         #endregion
 
+        
         public ICommand SearchTransactionsCommand
         {
              get

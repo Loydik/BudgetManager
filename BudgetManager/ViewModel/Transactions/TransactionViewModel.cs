@@ -14,8 +14,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         public Transaction TransactionObj
         {
-            get
-            { return _transactionObj; }
+            get { return _transactionObj; }
             set
             {
                 _transactionObj = value;
@@ -25,8 +24,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         public int? TransactionID
         {
-            get
-            { return _transactionObj.ID; }
+            get { return _transactionObj.ID; }
             set
             {
                 _transactionObj.ID = value;
@@ -36,8 +34,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         public DateTime Date
         {
-            get
-            { return _transactionObj.Date; }
+            get { return _transactionObj.Date; }
             set
             {
                 _transactionObj.Date = value;
@@ -47,14 +44,12 @@ namespace BudgetManager.ViewModel.Transactions
 
         public String DateToDisplay
         {
-            get
-            { return _transactionObj.Date.ToString("dd/MM/yyyy"); }
+            get { return _transactionObj.Date.ToString("dd/MM/yyyy"); }
         }
 
         public String AccountName
         {
-            get
-            { return _transactionObj.Account.Name; }
+            get { return _transactionObj.Account.Name; }
         }
 
         public int? AccountId
@@ -64,8 +59,7 @@ namespace BudgetManager.ViewModel.Transactions
 
         public decimal Amount
         {
-            get
-            { return _transactionObj.Amount; }
+            get { return _transactionObj.Amount; }
             set
             {
                 _transactionObj.Amount = value;
@@ -81,27 +75,27 @@ namespace BudgetManager.ViewModel.Transactions
                 {
                     return "-" + Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
                 }
-                else { return Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol; } 
+                else
+                {
+                    return Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
+                }
             }
         }
 
         public decimal? AccountBalanceAfter
         {
-            get
-            { return _transactionObj.AccountBalanceAfter; }
+            get { return _transactionObj.AccountBalanceAfter; }
         }
 
 
         public String CategoryName
         {
-            get
-            { return _transactionObj.Category.Name; }
+            get { return _transactionObj.Category.Name; }
         }
 
         public String Comments
         {
-            get
-            { return _transactionObj.Comments; }
+            get { return _transactionObj.Comments; }
             set
             {
                 _transactionObj.Comments = value;
@@ -112,6 +106,19 @@ namespace BudgetManager.ViewModel.Transactions
         public String TransactionType
         {
             get { return _transactionObj.TransactionType.Name; }
+        }
+
+        public Boolean IsWithdrawal
+        {
+            get
+            {
+                if (TransactionType == "Withdrawal")
+                {
+                    return true;
+                }
+
+                return false;
+            }
         }
 
         public TransactionViewModel()

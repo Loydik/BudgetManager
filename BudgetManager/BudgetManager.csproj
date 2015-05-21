@@ -159,7 +159,19 @@
     <Compile Include="Model\Db\TransactionType.cs" />
     <Compile Include="Model\Db\Util\CategoryObjectFactory.cs" />
     <Compile Include="Model\Db\Util\ICategory.cs" />
+    <Page Include="Themes\AccountsStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MainWindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\TransactionsStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,6 +255,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>BudgetManagerDatabase.mdf</DependentUpon>
     </Content>
+    <Resource Include="Resources\img\overview_icon.png" />
+    <Resource Include="Resources\img\about_icon.png" />
+    <Resource Include="Resources\img\settings_icon.png" />
+    <Resource Include="Resources\img\reports_icon.png" />
+    <Resource Include="Resources\img\accounts_icon.png" />
+    <Resource Include="Resources\img\dollar_sign.png" />
+    <Resource Include="Resources\img\calendar.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
