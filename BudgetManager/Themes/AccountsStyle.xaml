@@ -51,10 +51,18 @@
     </Style>
 
     <Style TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="#FFCAFFCA" />
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="FontSize" Value="25" />
-       
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsNegativeBalance}" Value="True">
+                <Setter Property="Background" Value="#FFF3AF9B"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsNegativeBalance}" Value="False">
+                <Setter Property="Background" Value="#FFCAFFCA"/>
+            </DataTrigger>
+
+        </Style.Triggers>
+
     </Style>
 
 </ResourceDictionary>

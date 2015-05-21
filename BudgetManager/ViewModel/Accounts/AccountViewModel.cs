@@ -68,6 +68,19 @@ namespace BudgetManager.ViewModel.Accounts
             { return _accountObj.Curency.Symbol; }
         }
 
+        public bool IsNegativeBalance
+        {
+            get
+            {
+                if (AccountBalance < 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public AccountViewModel(Account obj)
         {
             this._accountObj = obj;
