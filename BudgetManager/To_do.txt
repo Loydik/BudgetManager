@@ -2,14 +2,14 @@
 Proper encapsulation!
 Error Handling
 Remove unused usings
-Transactions Coloring!!!
-Style Datagrid!
 VALIDATION SERVICES!!!
 REFRESH COMMAND by Mediator!!!
 NO FUTURE DATES!
 Linq to SQL Repository Caching 
 Overview Tab
 TEST APPLICATION!
+DataTemplate for Transactions
+Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
 **********************************************************************************************
 DONE:
 
@@ -23,6 +23,8 @@ Accounts tab
 Adding/editing a transaction should update Account Balance!
 Transaction Search
 REFRESH STOPPED WORKING!
+Style Datagrid!
+Transactions Coloring!!!
 **********************************************************************************************
 DESIGN PATTERNS:
 Mediator for ViewModel Communications

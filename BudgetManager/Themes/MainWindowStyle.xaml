@@ -7,7 +7,10 @@
                     xmlns:calendarVw="clr-namespace:BudgetManager.View.CalendarTab"
                     xmlns:calendarVm="clr-namespace:BudgetManager.ViewModel.Calendar"
                     xmlns:reportsVw="clr-namespace:BudgetManager.View.ReportsTab"
-                    xmlns:reportsVm="clr-namespace:BudgetManager.ViewModel.Reports">
+                    xmlns:reportsVm="clr-namespace:BudgetManager.ViewModel.Reports"
+                    xmlns:overviewVw="clr-namespace:BudgetManager.View.OverviewTab"
+                    xmlns:overviewVm="clr-namespace:BudgetManager.ViewModel.Overview"
+                    >
 
     <Style x:Key="GeneralButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="#373737" />
@@ -236,6 +239,10 @@
 
     <DataTemplate DataType="{x:Type reportsVm:ReportsControlViewModel}">
         <reportsVw:ReportsControl/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type overviewVm:OverviewControlViewModel}">
+        <overviewVw:OverviewControl/>
     </DataTemplate>
 
 </ResourceDictionary>

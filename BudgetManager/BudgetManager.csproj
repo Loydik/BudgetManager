@@ -103,6 +103,7 @@
     <Compile Include="ViewModel\Calendar\CalendarControlViewModel.cs" />
     <Compile Include="ViewModel\Calendar\MonthViewCalendarViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Overview\OverviewControlViewModel.cs" />
     <Compile Include="ViewModel\Reports\ReportsControlViewModel.cs" />
     <Compile Include="ViewModel\Transactions\CreateNewTransactionViewModel.cs" />
     <Compile Include="ViewModel\Transactions\EditTransactionWindowViewModel.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="View\CalendarTab\TransactionsConverter.cs" />
     <Compile Include="View\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OverviewTab\OverviewControl.xaml.cs">
+      <DependentUpon>OverviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportsTab\ReportsControl.xaml.cs">
       <DependentUpon>ReportsControl.xaml</DependentUpon>
@@ -171,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\OverviewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\TransactionsStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OverviewTab\OverviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

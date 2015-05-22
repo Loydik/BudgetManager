@@ -19,13 +19,14 @@
 
 
         <!--ROW 2-->
-        <Grid Background="White" Grid.Row="1" Margin="60,0,60,0">
+        <Grid Background="#FFCCE2FF" Grid.Row="1" Margin="60,0,60,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.8*"/>
                 <RowDefinition Height="0.8*" />
                 <RowDefinition Height="0.8*" />
+                <RowDefinition Height="0.8*" />
                 <RowDefinition Height="0.8*"/>
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
@@ -36,36 +37,37 @@
 
             <!--1st Column-->
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Accounts"></TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Output Format"></TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Start Date"></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="End Date"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Output Format"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Start Date"></TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="End Date"></TextBlock>
 
             <!--2nd Column-->
 
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <ComboBox DockPanel.Dock="Left"
+                <ComboBox Grid.Row="0" Grid.Column="1"
                       ItemsSource="{Binding Accounts}"
                       DisplayMemberPath="AccountName"
                       SelectedValue="{Binding Path=SelectedAccount}"
                       IsEnabled="{Binding Path=ComboboxIsEnabled}"
-                      Margin="3" Width="237">
+                      Margin="3,3,224,3" >
                 </ComboBox>
-                <TextBlock Text="Select All Accounts" Margin="8"></TextBlock>
-                <CheckBox DockPanel.Dock="Right" Margin="10" IsChecked="{Binding Path=AllAccountsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    
-                </CheckBox>
-            </DockPanel>
-            <ComboBox Grid.Row="1" Grid.Column="1"
+
+            <DockPanel  Grid.Row="1" Grid.Column="1">
+                    <TextBlock Text="Select All Accounts" Margin="8"></TextBlock>
+                    <CheckBox DockPanel.Dock="Right" Margin="10" IsChecked="{Binding Path=AllAccountsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">    
+                    </CheckBox>
+                </DockPanel>
+            
+            <ComboBox Grid.Row="2" Grid.Column="1"
                       ItemsSource="{Binding ReportFormats}"
                       DisplayMemberPath="Value"
                       SelectedValuePath="Key"
                       SelectedValue="{Binding Path=SelectedFormatKey}"
-                      Margin="3">
+                      Margin="3,3,285,3">
                 
             </ComboBox>
 
-            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="3" ></DatePicker>
-            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="3"></DatePicker>
+            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="3,3,285,3" ></DatePicker>
+            <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="3,3,285,3"></DatePicker>
 
             <DockPanel Grid.Row="5" Grid.Column="1" LastChildFill="False">
                 <Button DockPanel.Dock="Right" Content="Generate" Width="89" Margin="8" Command="{Binding GenerateReportCommand, Mode=OneWay}"/>

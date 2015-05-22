@@ -54,7 +54,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource OverviewButtonStyle}" Content="Overview" Margin="5"/>
+            <Button Style="{StaticResource OverviewButtonStyle}" Content="Overview" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding OverviewVm}"/>
             
             
             <Button Style="{StaticResource CalendarButtonStyle}" Content="Calendar" Grid.Row="1" Margin="5"  Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding CalendarVm}"/>

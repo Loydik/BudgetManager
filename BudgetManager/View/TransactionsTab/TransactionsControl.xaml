@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="/Themes/TransactionsStyle.xaml"></ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid Background="Beige">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>

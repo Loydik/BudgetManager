@@ -51,5 +51,21 @@ namespace BudgetManager.Model.Managers
             Accounts = _db.Accounts.ToList();
         }
 
+        public decimal GetTotalBalance()
+        {
+            decimal balance = 0;
+
+            if (Accounts.Any())
+            {
+                foreach (var account in Accounts)
+                {
+                    balance = balance + account.Balance;
+                }
+
+                return balance;
+            }
+
+            return balance;
+        }
     }
 }
