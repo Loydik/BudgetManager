@@ -10,6 +10,7 @@ Overview Tab
 TEST APPLICATION!
 DataTemplate for Transactions
 Currency settings!
+Refresh charts after adding transactions
 **********************************************************************************************
 DONE:
 

@@ -69,6 +69,11 @@ namespace BudgetManager.Model.Managers
             return visualCategories;
         }
 
+        public void UpdateTransactions()
+        {
+            _transactionsManager.UpdateTransactions();
+        }
+
         //Class which will represent the data to be plotted
         public class CategoryDisplayClass
         {

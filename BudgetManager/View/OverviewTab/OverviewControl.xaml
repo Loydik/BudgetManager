@@ -9,8 +9,8 @@
              d:DesignHeight="700" d:DesignWidth="800">
     
     <UserControl.Resources>
-        <ResourceDictionary  Source="/Themes/Generic.xaml">
-
+        <ResourceDictionary  Source="/Themes/OverviewStyle.xaml">
+            
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -46,7 +46,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding AccountName}" />
-                            <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding AccountBalanceToDisplay}" />
+                            <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding AccountBalanceToDisplay}" Width="180" />
                         </GridView>
                     </ListView.View>
                     
@@ -61,7 +61,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding AccountName}" />
-                            <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding AccountBalanceToDisplay}" />
+                            <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding AccountBalanceToDisplay}" Width="170"/>
                         </GridView>
                     </ListView.View>
 
@@ -94,18 +94,19 @@
                 </Grid.ColumnDefinitions>
 
 
-                <ComboBox Grid.Column="1" Margin="12"  >
-                    <ComboBoxItem IsSelected="True">Expenses</ComboBoxItem>
-                    <ComboBoxItem>Income</ComboBoxItem>
+                <ComboBox Grid.Column="1" Margin="12"
+                          ItemsSource="{Binding TransactionTypes}"
+                          SelectedValue="{Binding Path=SelectedType}">
                 </ComboBox>
 
-                <ComboBox Grid.Column="2" Margin="12" >
-                    <ComboBoxItem IsSelected="True">Pie Chart</ComboBoxItem>
-                    <ComboBoxItem>Bar Chart</ComboBoxItem>
+                <ComboBox Grid.Column="2" Margin="12" 
+                          ItemsSource="{Binding ChartTypes}"
+                          SelectedValue="{Binding Path=SelectedChartType}">
+                    
                 </ComboBox>
                 
                 
-                <Button Grid.Column="3" Content="Refresh" Margin="12"></Button>
+                <!--<Button Grid.Column="3" Content="Refresh" Margin="12"></Button>-->
                 
 
             </Grid>
@@ -115,7 +116,7 @@
                  ChartTitle="{Binding ChartTitle}"
                  ChartSubTitle="{Binding ChartSubtitle}"
                  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" >
-                
+
                 <chart:PieChart.Series>
                     <chart:ChartSeries
                         SeriesTitle="Spendings by Category"
@@ -126,6 +127,22 @@
                 
             </chart:PieChart>
 
+            <chart:ClusteredColumnChart Grid.Row="1"  Style="{StaticResource ChartStyleMinimalSize}"
+                                         ChartTitle="{Binding ChartTitle}"
+                                         ChartSubTitle="{Binding ChartSubtitle}" 
+                                        ChartTitleVisibility="Visible"
+                                        ChartLegendVisibility="Visible">
+                
+                <chart:ClusteredColumnChart.Series>
+                    <chart:ChartSeries
+                        SeriesTitle="Categories"
+                        DisplayMember="CategoryName"
+                        ValueMember="Number"
+                        ItemsSource="{Binding Path=SpendingsVisualCategories}" />
+                </chart:ClusteredColumnChart.Series>
+                
+            </chart:ClusteredColumnChart>
+            
             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
                 <Grid ShowGridLines="True">
                 
@@ -146,7 +163,6 @@
                     
                     <DatePicker Grid.Column="4" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="0,20,0,0"></DatePicker>
                 
-                    <Button Grid.Column="5" Content="Update" Margin="15"></Button>
             </Grid>
             </Border>
         </Grid>

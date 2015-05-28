@@ -26,6 +26,12 @@ namespace BudgetManager.ViewModel.Overview
         private DateTime _endDate;
         private ObservableCollection<VisualizationManager.CategoryDisplayClass> _spendingsVisualCategories;
         private ObservableCollection<VisualizationManager.CategoryDisplayClass> _incomeVisualCategories;
+        private Boolean _isPieChartVisible;
+        private Boolean _isBarChartVisible;
+        private ObservableCollection<String> _transactionTypes; 
+        private String _selectedType;
+        private ObservableCollection<String> _chartTypes;
+        private String _selectedChartType;
 
         private decimal _totalBalance;
         private Curency _currency;
@@ -65,20 +71,87 @@ namespace BudgetManager.ViewModel.Overview
             }
         }
 
+
         public string TotalBalanceToDisplay
         {
             get { return _totalBalance + " " + _currency.Symbol; }
-           
+
+        }
+
+        public ObservableCollection<String> TransactionTypes
+        {
+            get { return _transactionTypes; }
+            set
+            {
+                _transactionTypes = value;
+                OnPropertyChanged("TransactionTypes");
+            }
+        }
+
+        public String SelectedType
+        {
+            get { return _selectedType; }
+
+            set
+            {
+                _selectedType = value;
+                RaisePropertyChanged("ChartTitle");
+                InitializeCharts();
+                OnPropertyChanged("SelectedType");
+            }
+        }
+
+        public ObservableCollection<String> ChartTypes
+        {
+            get { return _chartTypes; }
+            set
+            {
+                _chartTypes = value;
+                OnPropertyChanged("ChartTypes");
+            }
+        }
+
+        public String SelectedChartType
+        {
+            get { return _selectedChartType; }
+
+            set
+            {
+                _selectedChartType = value;
+
+                if (value == "Pie Chart")
+                {
+                    IsPieChartVisible = true;
+                    IsBarChartVisible = false;
+                }
+
+                else if (value == "Bar Chart")
+                {
+                    IsBarChartVisible = true;
+                    IsPieChartVisible = false;
+                }
+                //InitializeCharts();// bad for performance but visually cool!!!
+                OnPropertyChanged("SelectedChartType");
+            }
         }
 
         public string ChartTitle
         {
-            get { return "Total Spendings"; }
+            get
+            {
+                if (SelectedType == "Spendings")
+                {
+                    return "Total Spendings";
+                }
+
+                    return "Total Income";
+                
+            }
         }
 
         public string ChartSubtitle
         {
-            get { return "Transactions by Categories (Last 30 days)"; }
+            get { return "Transactions by Categories from " + StartDate.ToString("d-MM-yyyy") + " to " + EndDate.ToString("d-MM-yyyy"); }
         }
 
 
@@ -88,6 +161,8 @@ namespace BudgetManager.ViewModel.Overview
             set
             {
                 _startDate = value;
+                RaisePropertyChanged("ChartSubtitle");
+                InitializeCharts();
                 OnPropertyChanged("StartDate");
             }
         }
@@ -98,6 +173,8 @@ namespace BudgetManager.ViewModel.Overview
             set
             {
                 _endDate = value;
+                RaisePropertyChanged("ChartSubtitle");
+                InitializeCharts();
                 OnPropertyChanged("EndDate");
             }
         }
@@ -119,6 +196,26 @@ namespace BudgetManager.ViewModel.Overview
             {
                 _incomeVisualCategories = value;
                 OnPropertyChanged("IncomeVisualCategories");
+            }
+        }
+
+        public bool IsPieChartVisible
+        {
+            get { return _isPieChartVisible; }
+            set
+            {
+                _isPieChartVisible = value;
+                OnPropertyChanged("IsPieChartVisible");
+            }
+        }
+
+        public bool IsBarChartVisible
+        {
+            get { return _isBarChartVisible; }
+            set
+            {
+                _isBarChartVisible = value;
+                OnPropertyChanged("IsBarChartVisible");
             }
         }
 
@@ -145,8 +242,28 @@ namespace BudgetManager.ViewModel.Overview
                     l => new AccountViewModel(l));
             _totalBalance = _accountsManager.GetTotalBalance();
             _currency = _accountsManager.GetApplicationCurrency();
-            SpendingsVisualCategories = _visualizationManager.GetVisualCategoriesForSpendings(new TimePeriod(StartDate,EndDate)).ToObservableCollection();
+            TransactionTypes = new ObservableCollection<string>(){"Spendings", "Income"};
+            SelectedType = TransactionTypes.FirstOrDefault();
+            
+            ChartTypes = new ObservableCollection<string>() { "Pie Chart", "Bar Chart" };
+            SelectedChartType = ChartTypes.FirstOrDefault();
 
+        }
+
+        private void InitializeCharts()
+        {
+            if (SelectedType == "Spendings")
+            {
+                SpendingsVisualCategories =
+                    _visualizationManager.GetVisualCategoriesForSpendings(new TimePeriod(StartDate, EndDate))
+                        .ToObservableCollection();
+            }
+            else if (SelectedType == "Income")
+            {
+                SpendingsVisualCategories =
+                    _visualizationManager.GetVisualCategoriesForIncome(new TimePeriod(StartDate, EndDate))
+                        .ToObservableCollection();
+            }
         }
 
         #endregion //Construction
