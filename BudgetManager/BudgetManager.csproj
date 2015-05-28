@@ -54,14 +54,19 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart">
+      <HintPath>dlls\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.6\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SqlServerCe">
@@ -93,6 +98,7 @@
     <Compile Include="Model\Managers\FinancialManager.cs" />
     <Compile Include="Model\Managers\ReportsManager.cs" />
     <Compile Include="Model\Managers\TransactionsManager.cs" />
+    <Compile Include="Model\Managers\VisualizationManager.cs" />
     <Compile Include="Model\ReportGenerators\PdfReportGenerator.cs" />
     <Compile Include="Model\ReportGenerators\ReportGenerator.cs" />
     <Compile Include="Model\ReportGenerators\TimePeriod.cs" />

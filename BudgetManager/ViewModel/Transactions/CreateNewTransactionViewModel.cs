@@ -170,7 +170,7 @@ namespace BudgetManager.ViewModel.Transactions
         public Boolean CreateNewTransactionCanExecute()
         {
             
-            if(_amount != 0 && MinAmount<=_amount && _amount<=MaxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
+            if(_amount != 0 && 0<=_amount && _amount<=MaxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
             {
                 return true;
             }

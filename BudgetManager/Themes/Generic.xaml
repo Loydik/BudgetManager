@@ -4,7 +4,8 @@
                     xmlns:local="clr-namespace:BudgetManager.View.CalendarTab"
                     xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
                     xmlns:primitives="clr-namespace:Microsoft.Windows.Controls.Primitives;assembly=WPFToolkit"
-                    xmlns:vsm="clr-namespace:System.Windows;assembly=WPFToolkit">
+                    xmlns:vsm="clr-namespace:System.Windows;assembly=WPFToolkit"
+                    xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart">
 
 
     <!--CalendarItem-->
@@ -523,7 +524,11 @@
         </Setter>
     </Style>
 
-    
+    <!--Pie Chart-->
+    <Style x:Key="MinimalChartStyle" TargetType="chart:ChartBase">
+        <Setter Property="Width" Value="500"/>
+        <Setter Property="Height" Value="500"/>
+    </Style>
     
     
 </ResourceDictionary>

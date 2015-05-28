@@ -36,7 +36,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Initial Balance"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Account Type"></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Currency"></TextBlock>
+            
 
             <!--2nd Column-->
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Margin="3" ></TextBox>
@@ -48,12 +48,7 @@
                       SelectedValue="{Binding Path=SelectedAccountType}"
                       Margin="3">
             </ComboBox>
-            <ComboBox Grid.Row="3" Grid.Column="1"
-                      ItemsSource="{Binding Currencies}"
-                      DisplayMemberPath="Name"
-                      SelectedValue="{Binding Path=SelectedCurrency}"
-                      Margin="3">
-            </ComboBox>
+            
 
             <DockPanel Grid.Row="6" Grid.Column="1" LastChildFill="False">
                 <Button DockPanel.Dock="Left" Content="Create" Width="96" Margin="8" Command="{Binding CreateNewAccountCommand}" CommandParameter="{Binding ElementName=CreateNewAccount}"/>

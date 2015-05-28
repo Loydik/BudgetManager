@@ -29,7 +29,7 @@ namespace BudgetManager.ViewModel.Accounts
         {
             _accManager = new AccountsManager();
             SelectedAccountType = AccountTypes.FirstOrDefault();
-            SelectedCurrency = Currencies.FirstOrDefault();
+            SelectedCurrency = _accManager.GetApplicationCurrency();
         }
 
         #region Properties
@@ -116,6 +116,8 @@ namespace BudgetManager.ViewModel.Accounts
 
         public void CreateNewAccount(Window x)
         {
+
+
             _accManager.AddAccount(Name, Balance, SelectedAccountType, SelectedCurrency);
             CloseWindow(x);
         }

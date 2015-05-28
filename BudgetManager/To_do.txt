@@ -9,7 +9,7 @@ Linq to SQL Repository Caching
 Overview Tab
 TEST APPLICATION!
 DataTemplate for Transactions
-Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
+Currency settings!
 **********************************************************************************************
 DONE:
 
@@ -25,6 +25,7 @@ Transaction Search
 REFRESH STOPPED WORKING!
 Style Datagrid!
 Transactions Coloring!!!
+Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
 **********************************************************************************************
 DESIGN PATTERNS:
 Mediator for ViewModel Communications

@@ -4,19 +4,31 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using BudgetManager.Model.Db;
 using BudgetManager.Model.Managers;
+using BudgetManager.Model.ReportGenerators;
 using BudgetManager.ViewModel.Accounts;
 using BudgetManager.ViewModel.Util;
+using BudgetManager.View.OverviewTab;
 
 namespace BudgetManager.ViewModel.Overview
 {
     public class OverviewControlViewModel : ObservableObject, IPageViewModel
     {
         private AccountsManager _accountsManager;
+        private VisualizationManager _visualizationManager;
         private ObservableCollection<AccountViewModel> _allAccounts;
         private ObservableCollection<AccountViewModel> _checkingAccounts;
         private ObservableCollection<AccountViewModel> _savingsAccounts;
+        private DateTime _startDate;
+        private DateTime _endDate;
+        private ObservableCollection<VisualizationManager.CategoryDisplayClass> _spendingsVisualCategories;
+        private ObservableCollection<VisualizationManager.CategoryDisplayClass> _incomeVisualCategories;
+
         private decimal _totalBalance;
+        private Curency _currency;
 
         public string Name
         {
@@ -53,22 +65,70 @@ namespace BudgetManager.ViewModel.Overview
             }
         }
 
-        public decimal TotalBalance
+        public string TotalBalanceToDisplay
         {
-            get { return _totalBalance; }
+            get { return _totalBalance + " " + _currency.Symbol; }
+           
+        }
+
+        public string ChartTitle
+        {
+            get { return "Total Spendings"; }
+        }
+
+        public string ChartSubtitle
+        {
+            get { return "Transactions by Categories (Last 30 days)"; }
+        }
+
+
+        public DateTime StartDate
+        {
+            get { return _startDate; }
             set
             {
-                _totalBalance = value;
-                OnPropertyChanged("TotalBalance");
+                _startDate = value;
+                OnPropertyChanged("StartDate");
             }
         }
-        
 
+        public DateTime EndDate
+        {
+            get { return _endDate; }
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged("EndDate");
+            }
+        }
+
+        public ObservableCollection<VisualizationManager.CategoryDisplayClass> SpendingsVisualCategories
+        {
+            get { return _spendingsVisualCategories; }
+            set
+            {
+                _spendingsVisualCategories = value;
+                OnPropertyChanged("SpendingsVisualCategories");
+            }
+        }
+
+        public ObservableCollection<VisualizationManager.CategoryDisplayClass> IncomeVisualCategories
+        {
+            get { return _incomeVisualCategories; }
+            set
+            {
+                _incomeVisualCategories = value;
+                OnPropertyChanged("IncomeVisualCategories");
+            }
+        }
 
         #region Construction
         public OverviewControlViewModel()
         {
             _accountsManager = new AccountsManager();
+            _visualizationManager = new VisualizationManager();
+            _startDate = DateTime.Now.AddDays(-30);
+            _endDate = DateTime.Now;
             Init();
         }
 
@@ -83,7 +143,10 @@ namespace BudgetManager.ViewModel.Overview
                 ConversionHelper.ToObservableCollection(
                     _accountsManager.Accounts.Where(n => n.AccountType.Name == "Savings").ToList(),
                     l => new AccountViewModel(l));
-            TotalBalance = _accountsManager.GetTotalBalance();
+            _totalBalance = _accountsManager.GetTotalBalance();
+            _currency = _accountsManager.GetApplicationCurrency();
+            SpendingsVisualCategories = _visualizationManager.GetVisualCategoriesForSpendings(new TimePeriod(StartDate,EndDate)).ToObservableCollection();
+
         }
 
         #endregion //Construction

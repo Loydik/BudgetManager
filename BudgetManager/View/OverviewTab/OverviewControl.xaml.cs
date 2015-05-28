@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BudgetManager.ViewModel.Overview;
 
 namespace BudgetManager.View.OverviewTab
 {
@@ -20,9 +22,10 @@ namespace BudgetManager.View.OverviewTab
     /// </summary>
     public partial class OverviewControl : UserControl
     {
+
         public OverviewControl()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
     }
 }

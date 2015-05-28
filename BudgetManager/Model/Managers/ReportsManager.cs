@@ -201,6 +201,27 @@ namespace BudgetManager.Model.Managers
             return balance;
         }
 
+        public List<Category> GetUsedCategories(TimePeriod period)
+        {
+            List<Category> categories = new List<Category>();
+
+                var transactions =
+                    Transactions.Where(n => n.Date >= period.StartDate && n.Date <= period.EndDate).ToList();
+
+            if (transactions.Count() != 0)
+            {
+                foreach (var transaction in transactions)
+                {
+                    categories.Add(transaction.Category);
+                }
+
+                categories = categories.Distinct().ToList();
+            }
+
+
+            return categories;
+        }
+
         public List<Category> GetUsedCategories(int? accountId, TimePeriod period)
         {
             List<Category> categories = new List<Category>();

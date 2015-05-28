@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BudgetManager.Model.Db;
+using System.Configuration;
 
 
 namespace BudgetManager.Model.Managers
@@ -66,6 +67,22 @@ namespace BudgetManager.Model.Managers
             }
 
             return balance;
+        }
+
+        public Curency GetApplicationCurrency()
+        {
+            String currency = ConfigurationManager.AppSettings["currency"];
+
+            if (currency != null)
+            {
+                Curency cur = Currencies.Single(n => n.Name == currency);
+                return cur;
+            }
+            
+            
+            return Currencies.FirstOrDefault();
+            
+
         }
     }
 }
