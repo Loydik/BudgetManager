@@ -21,16 +21,16 @@
 
         <Grid Grid.Row="0" Margin="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Content="New" Command="{Binding OpenCreateNewAccountWindowCommand}"></Button>
+
+            <Button Grid.Column="0" Command="{Binding OpenCreateNewAccountWindowCommand}" Style="{StaticResource NewButtonStyle}"></Button>
             <!--<Button Content="Edit" Grid.Column="1"/>
             <Button Grid.Column="2" Content="Remove"></Button>-->
-            <Button Grid.Column="3" Content="Refresh" Command="{Binding RefreshCommand}"></Button>
+            <Button Grid.Column="3" Command="{Binding RefreshCommand}" Style="{StaticResource RefreshButtonStyle}"></Button>
         </Grid>
 
         <DataGrid Grid.Row="2" IsReadOnly="True" VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False" CanUserSortColumns="True" ItemsSource="{Binding AllAccounts, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="3">

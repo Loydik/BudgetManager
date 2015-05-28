@@ -273,6 +273,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>BudgetManagerDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Resources\img\money_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\img\refresh_icon.png" />
+    <Resource Include="Resources\img\add_icon.png" />
     <Resource Include="Resources\img\overview_icon.png" />
     <Resource Include="Resources\img\about_icon.png" />
     <Resource Include="Resources\img\settings_icon.png" />

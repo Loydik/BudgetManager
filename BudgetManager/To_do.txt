@@ -6,11 +6,11 @@ VALIDATION SERVICES!!!
 REFRESH COMMAND by Mediator!!!
 NO FUTURE DATES!
 Linq to SQL Repository Caching 
-Overview Tab
 TEST APPLICATION!
 DataTemplate for Transactions
 Currency settings!
 Refresh charts after adding transactions
+New and Refresh button styles
 **********************************************************************************************
 DONE:
 
@@ -27,6 +27,7 @@ REFRESH STOPPED WORKING!
 Style Datagrid!
 Transactions Coloring!!!
 Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
+Overview Tab
 **********************************************************************************************
 DESIGN PATTERNS:
 Mediator for ViewModel Communications

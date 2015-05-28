@@ -27,7 +27,7 @@ namespace BudgetManager.ViewModel.Transactions
         private ICommand _closeWindowCommand;
 
         private const decimal MaxAmount = 999999999999999999m;
-        private const decimal MinAmount = -999999999999999999m;
+        //private const decimal MinAmount = -999999999999999999m;
 
         #region Construction
 
