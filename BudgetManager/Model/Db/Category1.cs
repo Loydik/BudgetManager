@@ -15,5 +15,12 @@ namespace BudgetManager.Model.Db
         [Column(Name = "name")]
         public String Name { get; set; }
 
+        public Category()
+        { }
+
+        public Category(String name)
+        {
+            Name = name;
+        }
     }
 }

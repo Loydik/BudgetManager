@@ -10,6 +10,8 @@
                     xmlns:reportsVm="clr-namespace:BudgetManager.ViewModel.Reports"
                     xmlns:overviewVw="clr-namespace:BudgetManager.View.OverviewTab"
                     xmlns:overviewVm="clr-namespace:BudgetManager.ViewModel.Overview"
+                    xmlns:settingsVm="clr-namespace:BudgetManager.ViewModel.Settings"
+                    xmlns:settingsVw="clr-namespace:BudgetManager.View.SettingsTab"
                     >
 
     <Style x:Key="GeneralButtonStyle" TargetType="{x:Type Button}">
@@ -243,6 +245,10 @@
 
     <DataTemplate DataType="{x:Type overviewVm:OverviewControlViewModel}">
         <overviewVw:OverviewControl/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type settingsVm:SettingsControlViewModel}">
+        <settingsVw:SettingsControl/>
     </DataTemplate>
 
 </ResourceDictionary>

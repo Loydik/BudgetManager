@@ -45,6 +45,12 @@ namespace BudgetManager.Model.Managers
             Transactions = _db.Transactions.ToList();
         }
 
+        public void UpdateCategories()
+        {
+            _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Categories);
+            TransactionCategories = _db.Categories.ToList();
+        }
+
         public void UpdateTransactionFields(int? id, DateTime date, int accountId, decimal amount, int categoryId, String comments, int transactionTypeId)
         {
             Transaction entity = _db.Transactions.Single(n => n.ID == id);
@@ -67,5 +73,31 @@ namespace BudgetManager.Model.Managers
             _db.SubmitChanges();
         }
 
+        public void AddCategory(String name)
+        {
+            Category cat = new Category(name);
+            _db.Categories.InsertOnSubmit(cat);
+            _db.SubmitChanges();
+
+            TransactionCategories.Add(cat);
+        }
+
+        public void DeleteCategory(int id)
+        {
+            Category entity = _db.Categories.Single(n => n.ID == id);
+            Category uncategorized = _db.Categories.Single(n => n.Name == "Uncategorized");
+
+            var transactions = _db.Transactions.Where(n => n.Category.ID == id);
+
+            foreach (var transaction in transactions)
+            {
+                transaction.Category = uncategorized;
+            }
+
+            _db.Categories.DeleteOnSubmit(entity);
+            _db.SubmitChanges();
+
+            _db.SubmitChanges();
+        }
     }
 }

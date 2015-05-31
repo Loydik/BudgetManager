@@ -20,6 +20,11 @@ namespace BudgetManager.ViewModel.Util
             window.ShowDialog();
         }
 
+        public void ShowMessage(String message)
+        {
+            MessageBox.Show(message);
+        }
+
         #endregion
     }
 }

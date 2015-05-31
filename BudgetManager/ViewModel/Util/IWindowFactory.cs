@@ -11,5 +11,6 @@ namespace BudgetManager.ViewModel.Util
     public interface IWindowFactory
     {
         void CreateNewWindow(ObservableObject viewModel, Window window);
+        void ShowMessage(String message);
     }
 }

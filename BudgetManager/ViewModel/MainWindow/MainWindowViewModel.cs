@@ -10,6 +10,7 @@ using BudgetManager.ViewModel.Accounts;
 using BudgetManager.ViewModel.Calendar;
 using BudgetManager.ViewModel.Overview;
 using BudgetManager.ViewModel.Reports;
+using BudgetManager.ViewModel.Settings;
 
 namespace BudgetManager.ViewModel.MainWindow
 {
@@ -72,6 +73,11 @@ namespace BudgetManager.ViewModel.MainWindow
             get { return PageViewModels.SingleOrDefault(n => n.Name == "Overview"); }
         }
 
+        public IPageViewModel SettingsVm
+        {
+            get { return PageViewModels.SingleOrDefault(n => n.Name == "Settings"); }
+        }
+
         public IPageViewModel CurrentPageViewModel
         {
             get
@@ -96,6 +102,7 @@ namespace BudgetManager.ViewModel.MainWindow
             PageViewModels.Add(new AccountsControlViewModel());
             PageViewModels.Add(new CalendarControlViewModel());
             PageViewModels.Add(new ReportsControlViewModel());
+            PageViewModels.Add(new SettingsControlViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

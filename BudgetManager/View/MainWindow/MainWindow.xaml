@@ -74,8 +74,8 @@
             <Button Style="{StaticResource AccountsButtonStyle}" Content="Accounts" Grid.Row="3" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding AccountsVm}"/>
 
             <Button Style="{StaticResource ReportsButtonStyle}" Content="Reports" Grid.Row="4" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding ReportsVm}"/>
-                
-            <Button Style="{StaticResource SettingsButtonStyle}" Content="Settings" Grid.Row="5" Margin="5"/>
+
+            <Button Style="{StaticResource SettingsButtonStyle}" Content="Settings" Grid.Row="5" Margin="5" Command="{Binding DataContext.ChangePageCommand,  RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding SettingsVm}"/>
 
             <Button Style="{StaticResource AboutButtonStyle}" Content="About" Grid.Row="6" Margin="5"/>
 
