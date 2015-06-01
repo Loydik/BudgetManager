@@ -27,6 +27,12 @@ namespace BudgetManager.Model.Managers
             Transactions = _db.Transactions.ToList();
         }
 
+        public void UpdateAccounts()
+        {
+            _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, _db.Accounts);
+            Accounts = _db.Accounts.ToList();
+        }
+
         public void UpdateAccountBalance(int? id, decimal value, TransactionType type, int? transactionId)
         {
             UpdateTransactions();

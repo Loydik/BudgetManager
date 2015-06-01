@@ -125,10 +125,16 @@ namespace BudgetManager.ViewModel.Transactions
                 if (value == "AccountDeleted")
                 {
                     _mediatorAccountsMessage = value;
+                    _financialManager.UpdateAccounts();
                     Refresh();
-                    OnPropertyChanged("MediatorCategoriesMessage");
                 }
-            }
+                else if (value == "AccountAdded")
+                {
+                    _mediatorAccountsMessage = value;
+                    _financialManager.UpdateAccounts();
+                }
+                OnPropertyChanged("MediatorCategoriesMessage");
+                }
         }
 
         #endregion
@@ -178,11 +184,23 @@ namespace BudgetManager.ViewModel.Transactions
                 {
                     _openCreateNewTransactionWindowCommand = new RelayCommand(
                         param =>
-                            _windowFactory.CreateNewWindow(new CreateNewTransactionViewModel(),
+                            OpenCreateNewTransactionWindow(new CreateNewTransactionViewModel(),
                                 new CreateNewTransactionWindow()) //, param => CreateNewTransactionCanExecute()
                         );
                 }
                 return _openCreateNewTransactionWindowCommand;
+            }
+        }
+
+        private void OpenCreateNewTransactionWindow(CreateNewTransactionViewModel viewModel, CreateNewTransactionWindow window)
+        {
+            if (_financialManager.Accounts.Any())
+            {
+                _windowFactory.CreateNewWindow(viewModel, window);
+            }
+            else
+            {
+                _windowFactory.ShowMessage("You have to create at least one account");
             }
         }
 
