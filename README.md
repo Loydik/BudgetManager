@@ -12,3 +12,6 @@ Switched from SQLite to Microsoft LocalDB due to LINQ TO SQL compatibility issue
 
 18.05.2015
 Released version v0.3-alpha. The most basic functionality, basic GUI and no tests
+
+31.05.2015
+Released version v0.5-alpha. Most of the planned functionality is implemented. (Exporting to xls and importing/exporting a database file is left)
