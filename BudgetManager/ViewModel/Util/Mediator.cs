@@ -12,7 +12,7 @@ namespace BudgetManager.ViewModel.Util
      /// Pattern used for cross-ViewModelCommunication
      /// </summary>
 
-    public enum ViewModelMessages { UserDeleteAccount = 1 };
+    public enum ViewModelMessages { UserDeleteAccount = 1, TransactionsChanged = 2, CategoriesChanged = 3, AccountsChanged = 4, CurrencyChanged = 5 };
 
     public sealed class Mediator
     {

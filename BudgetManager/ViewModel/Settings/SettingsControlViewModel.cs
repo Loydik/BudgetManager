@@ -89,6 +89,7 @@ namespace BudgetManager.ViewModel.Settings
                 _transManager.DeleteCategory(SelectedCategory.CategoryId);
                 Categories.Remove(SelectedCategory);
                 _transManager.UpdateCategories();
+                Mediator.Instance.NotifyListeners(ViewModelMessages.CategoriesChanged, "CategoryDeleted");
             }
         }
 
@@ -119,6 +120,7 @@ namespace BudgetManager.ViewModel.Settings
             {
                 _transManager.AddCategory(NewCategoryName);
                 Init();
+                Mediator.Instance.NotifyListeners(ViewModelMessages.CategoriesChanged, "CategoryAdded");
                 NewCategoryName = "";
             }
         }

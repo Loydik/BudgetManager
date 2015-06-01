@@ -163,6 +163,9 @@ namespace BudgetManager.ViewModel.Transactions
             }
 
             _financialManager.UpdateAccountBalance(SelectedAccount.Id, Amount, SelectedTransactionType, addedTransaction.ID);
+            
+            //We are notifying that Transactions have changed
+            Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "TransactionAdded");
 
             this.CloseWindow(x);
         }

@@ -78,37 +78,39 @@ namespace BudgetManager.Model.Managers
             if (transactions.Count() != 0)
             {
                 firstTransaction = transactions.First();
-            
-            try
-            {
-                var previousTransactions = Transactions.Where(n => n.Date<=afterDate && n.ID != transactionId).OrderBy(n => n.ID);
-                previousTransaction = previousTransactions.Last();
 
-                int i = 2;
-                int count = previousTransactions.Count();
-
-                while (true)
+                try
                 {
-                    if (previousTransaction.Date == afterDate && previousTransaction.ID > transactionId)
+                    var previousTransactions =
+                        Transactions.Where(n => n.Date <= afterDate && n.ID != transactionId).OrderBy(n => n.ID);
+                    previousTransaction = previousTransactions.Last();
+
+                    int i = 2;
+                    int count = previousTransactions.Count();
+
+                    while (true)
                     {
-                        previousTransaction = previousTransactions.ElementAt(count-i);
-                        i++;
-                    }
-                    else
-                    {
-                        break;
+                        if (previousTransaction.Date == afterDate && previousTransaction.ID > transactionId)
+                        {
+                            previousTransaction = previousTransactions.ElementAt(count - i);
+                            i++;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
-            }
 
-            #pragma warning disable 0168// we do not want "declared but never used warning!"
+#pragma warning disable 0168// we do not want "declared but never used warning!"
 
-            catch (InvalidOperationException ex)
-            {
-                //We simply go ahead 
-            }
+                catch (InvalidOperationException ex)
+                {
+                    //We simply go ahead 
+                }
 
-            #pragma warning restore 0168
+
+#pragma warning restore 0168
 
             if (previousTransaction != null)
             {

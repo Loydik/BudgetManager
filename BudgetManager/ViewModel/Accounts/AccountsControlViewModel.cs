@@ -20,6 +20,7 @@ namespace BudgetManager.ViewModel.Accounts
         private IWindowFactory _windowFactory;
         private ObservableCollection<AccountViewModel> _allAccounts;
         private string _deleteAccountConfirmation;
+        private string _mediatorAccountMessage;
 
         private ICommand _openCreateNewAccountWindowCommand;
         private ICommand _refreshCommand;
@@ -39,6 +40,19 @@ namespace BudgetManager.ViewModel.Accounts
             {
                 _allAccounts = value;
                 OnPropertyChanged("AllAccounts");
+            }
+        }
+
+        public String MediatorAccountMessage
+        {
+            get { return _mediatorAccountMessage; }
+            set {
+                if (value == "AccountAdded")
+                {
+                    _mediatorAccountMessage = value;
+                    Refresh();
+                    RaisePropertyChanged("MediatorAccountMessage");
+                }
             }
         }
 
@@ -64,6 +78,11 @@ namespace BudgetManager.ViewModel.Accounts
 
                 //Callback delegate, when message is seen
                 (Object o) => { DeleteAccountConfirmation = (String) o; }, ViewModelMessages.UserDeleteAccount);
+
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorAccountMessage = (String) o; }, ViewModelMessages.AccountsChanged);
         }
 
         private void Init()
@@ -136,6 +155,7 @@ namespace BudgetManager.ViewModel.Accounts
                 {
                     _accManager.DeleteAccount(acc.AccountID);
                     _deleteAccountConfirmation = "";
+                    Mediator.Instance.NotifyListeners(ViewModelMessages.AccountsChanged, "AccountDeleted");
                     Refresh();
                 }
             }

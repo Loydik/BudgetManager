@@ -2,15 +2,14 @@
 Proper encapsulation!
 Error Handling
 Remove unused usings
-VALIDATION SERVICES!!!
 REFRESH COMMAND by Mediator!!!
 NO FUTURE DATES!
 Linq to SQL Repository Caching 
 TEST APPLICATION!
 DataTemplate for Transactions
-Currency settings!
+Currency settings!!!!
 Refresh charts after adding transactions
-New and Refresh button styles
+Import/Export Database File
 **********************************************************************************************
 DONE:
 
@@ -27,6 +26,7 @@ REFRESH STOPPED WORKING!
 Style Datagrid!
 Transactions Coloring!!!
 Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
+New and Refresh button styles
 Overview Tab
 **********************************************************************************************
 DESIGN PATTERNS:

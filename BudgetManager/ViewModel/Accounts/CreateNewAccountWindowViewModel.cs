@@ -116,9 +116,8 @@ namespace BudgetManager.ViewModel.Accounts
 
         public void CreateNewAccount(Window x)
         {
-
-
             _accManager.AddAccount(Name, Balance, SelectedAccountType, SelectedCurrency);
+            Mediator.Instance.NotifyListeners(ViewModelMessages.AccountsChanged, "AccountAdded");
             CloseWindow(x);
         }
 

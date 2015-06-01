@@ -32,6 +32,7 @@ namespace BudgetManager.ViewModel.Reports
         private bool _allAccountsChecked;
         private bool _comboboxIsEnabled;
         private IWindowFactory _windowFactory;
+        private String _mediatorAccountMessage;
 
         public string Name
         {
@@ -50,12 +51,18 @@ namespace BudgetManager.ViewModel.Reports
             _endDate = DateTime.Now;
             _comboboxIsEnabled = true;
             SelectedFormatKey = 1;
-            SelectedAccount = Accounts.FirstOrDefault();
+
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorAccountMessage = (String)o; }, ViewModelMessages.AccountsChanged);
+            
         }
 
         private void Init()
         {
             Accounts = ConversionHelper.ToObservableCollection(_accManager.Accounts.ToList(), l => new AccountViewModel(l));//getting data from manager and converting into Observable list
+            SelectedAccount = Accounts.FirstOrDefault();
         }
 
         public ObservableCollection<AccountViewModel> Accounts
@@ -142,6 +149,21 @@ namespace BudgetManager.ViewModel.Reports
             {
                 _endDate = value;
                 OnPropertyChanged("EndDate");
+            }
+        }
+
+        public String MediatorAccountMessage
+        {
+            get { return _mediatorAccountMessage; }
+            set
+            {
+                if (value == "AccountAdded" || value == "AccountDeleted")
+                {
+                    _mediatorAccountMessage = value;
+                    _accManager.UpdateAccounts();
+                    Init();
+                    RaisePropertyChanged("MediatorAccountMessage");
+                }
             }
         }
 

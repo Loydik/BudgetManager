@@ -33,6 +33,10 @@ namespace BudgetManager.ViewModel.Overview
         private ObservableCollection<String> _chartTypes;
         private String _selectedChartType;
 
+        private String _mediatorAccountsMessage;
+        private String _mediatorTransactionsMessage;
+        private String _mediatorCategoriesMessage;
+
         private decimal _totalBalance;
         private Curency _currency;
 
@@ -71,6 +75,55 @@ namespace BudgetManager.ViewModel.Overview
             }
         }
 
+        public String MediatorAccountsMessage
+        {
+            get { return _mediatorAccountsMessage; }
+            set
+            {
+                if (value == "AccountDeleted" || value == "AccountAdded")
+                {
+                    _mediatorAccountsMessage = value;
+                    _accountsManager.UpdateAccounts();
+                    _visualizationManager.UpdateTransactions();
+                    Init();
+                    InitializeCharts();
+                    OnPropertyChanged("MediatorAccountsMessage");
+                }
+            }
+        }
+
+        public String MediatorTransactionsMessage
+        {
+            get { return _mediatorTransactionsMessage; }
+            set
+            {
+                if (value == "TransactionAdded" || value == "TransactionDeleted" || value == "TransactionEdited")
+                {
+                    _mediatorTransactionsMessage = value;
+                    _accountsManager.UpdateAccounts();
+                    _visualizationManager.UpdateTransactions();
+                    Init();
+                    InitializeCharts();
+                    OnPropertyChanged("MediatorTransactionsMessage");
+                }
+            }
+        }
+
+        public String MediatorCategoriesMessage
+        {
+            get { return _mediatorCategoriesMessage; }
+            set
+            {
+                if (value == "CategoryDeleted")
+                {
+                    _mediatorCategoriesMessage = value;
+                    _visualizationManager.UpdateTransactions();
+                    Init();
+                    InitializeCharts();
+                    OnPropertyChanged("MediatorTransactionsMessage");
+                }
+            }
+        }
 
         public string TotalBalanceToDisplay
         {
@@ -227,6 +280,25 @@ namespace BudgetManager.ViewModel.Overview
             _startDate = DateTime.Now.AddDays(-30);
             _endDate = DateTime.Now;
             Init();
+
+            //register to the mediator for the 
+            //AccountsChanged message
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorAccountsMessage = (String)o; }, ViewModelMessages.AccountsChanged);
+
+            //register to the mediator for the 
+            //TransactionsChanged message
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorTransactionsMessage = (String)o; }, ViewModelMessages.TransactionsChanged);
+
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorCategoriesMessage = (String)o; }, ViewModelMessages.CategoriesChanged);
         }
 
         private void Init()
@@ -242,6 +314,7 @@ namespace BudgetManager.ViewModel.Overview
                     l => new AccountViewModel(l));
             _totalBalance = _accountsManager.GetTotalBalance();
             _currency = _accountsManager.GetApplicationCurrency();
+            
             TransactionTypes = new ObservableCollection<string>(){"Spendings", "Income"};
             SelectedType = TransactionTypes.FirstOrDefault();
             

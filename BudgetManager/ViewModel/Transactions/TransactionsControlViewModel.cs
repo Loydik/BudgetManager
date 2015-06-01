@@ -29,6 +29,9 @@ namespace BudgetManager.ViewModel.Transactions
         private IWindowFactory _windowFactory;
         private ICommand _searchTransactionsCommand;
         private ICommand _showAllTransactionsCommand;
+        private string _mediatorTransactionsMessage;
+        private string _mediatorCategoriesMessage;
+        private string _mediatorAccountsMessage;
 
         #region Properties
 
@@ -87,6 +90,47 @@ namespace BudgetManager.ViewModel.Transactions
             }
         }
 
+        public String MediatorTransactionsMessage
+        {
+            get { return _mediatorTransactionsMessage; }
+            set {
+                if (value == "TransactionAdded" || value == "TransactionEdited")
+                    {
+                     _mediatorTransactionsMessage = value; 
+                     Refresh();
+                     OnPropertyChanged("MediatorTransactionsMessage");
+                }
+            }
+        }
+
+        public String MediatorCategoriesMessage
+        {
+            get { return _mediatorCategoriesMessage; }
+            set
+            {
+                if (value == "CategoryDeleted")
+                {
+                    _mediatorCategoriesMessage = value;
+                    Refresh();
+                    OnPropertyChanged("MediatorCategoriesMessage");
+                }
+            }
+        }
+
+        public String MediatorAccountsMessage
+        {
+            get { return _mediatorAccountsMessage; }
+            set
+            {
+                if (value == "AccountDeleted")
+                {
+                    _mediatorAccountsMessage = value;
+                    Refresh();
+                    OnPropertyChanged("MediatorCategoriesMessage");
+                }
+            }
+        }
+
         #endregion
 
 
@@ -97,14 +141,31 @@ namespace BudgetManager.ViewModel.Transactions
             Init();
             _windowFactory = new ProductionWindowFactory();
             _filterTypes = new List<string>(){"Accounts", "Categories", "Comments"};
-            _selectedFilterType = _filterTypes.FirstOrDefault();
-            TransactionsToDisplay = AllTransactions;
+            _selectedFilterType = _filterTypes.FirstOrDefault(); 
+            
+            //register to the mediator for the 
+            //TransactionsChanged message
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorTransactionsMessage = (String)o; }, ViewModelMessages.TransactionsChanged);
+
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorCategoriesMessage = (String)o; }, ViewModelMessages.CategoriesChanged);
+
+            Mediator.Instance.Register(
+
+                //Callback delegate, when message is seen
+                (Object o) => { MediatorAccountsMessage = (String)o; }, ViewModelMessages.AccountsChanged);
         }
 
         private void Init()
         {
             var sortedTransactions = _transManager.Transactions.OrderByDescending(n => n.Date).ThenByDescending(n=>n.ID).ToList();
             AllTransactions = ConversionHelper.ToObservableCollection(sortedTransactions, l => new TransactionViewModel(l));//getting data from manager and converting into Observable list
+            TransactionsToDisplay = AllTransactions;
         }
 
         #region ICommands
@@ -143,7 +204,6 @@ namespace BudgetManager.ViewModel.Transactions
         {
             _transManager.UpdateTransactions();
             Init();
-            TransactionsToDisplay = AllTransactions;
         }
 
         public ICommand OpenEditTransactionWindowCommand
@@ -187,6 +247,7 @@ namespace BudgetManager.ViewModel.Transactions
             _financialManager.UpdateTransactionsAfterBalancesinAccount(accountId, trans.Date, trans.TransactionID);
             _financialManager.RefreshAccountBalance(accountId);
             Refresh();
+            Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "Transaction Deleted");
         }
 
         #endregion
