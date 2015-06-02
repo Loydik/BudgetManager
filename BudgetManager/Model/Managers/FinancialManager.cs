@@ -39,14 +39,14 @@ namespace BudgetManager.Model.Managers
 
             var account = Accounts.Single(n => n.Id == id);
 
-            if (type.Name.Equals("Withdrawal"))
-            {
-                account.Balance = account.Balance - value;
-            }
-            else if (type.Name.Equals("Deposit"))
-            {
+            //if (type.Name.Equals("Withdrawal"))
+            //{
                 account.Balance = account.Balance + value;
-            }
+            //}
+            //else if (type.Name.Equals("Deposit"))
+            //{
+                //account.Balance = account.Balance + value;
+            //}
 
             var transaction = Transactions.OrderBy(n=>n.Date).ThenBy(n=>n.ID).Last();
             transaction.AccountBalanceAfter = account.Balance;
@@ -57,14 +57,19 @@ namespace BudgetManager.Model.Managers
         public void RefreshAccountBalance(int? id)
         {
             UpdateTransactions();
+            UpdateAccounts();
 
-            var totalDeposit = Transactions.Where(n => n.TransactionType.Name.Equals("Deposit")).Select(n => n.Amount).ToList().Sum();
-            var totalWithdrawal = Transactions.Where(n => n.TransactionType.Name.Equals("Withdrawal")).Select(n => n.Amount).ToList().Sum();
+            //var totalDeposit = Transactions.Where(n => n.TransactionType.Name.Equals("Deposit")).Select(n => n.Amount).ToList().Sum();
+            //var totalWithdrawal = Transactions.Where(n => n.TransactionType.Name.Equals("Withdrawal")).Select(n => n.Amount).ToList().Sum();
 
-            var difference = totalDeposit - totalWithdrawal;
+            
+
+          //  var difference = totalDeposit - totalWithdrawal;
+            //var difference = totalDeposit + totalWithdrawal;
 
             var account = Accounts.Single(n => n.Id == id);
-            account.Balance = account.InitialBalance + difference;
+            var totalValue = Transactions.Where(n => n.Account == account).Select(n => n.Amount).ToList().Sum();
+            account.Balance = account.InitialBalance + totalValue;
 
             _db.SubmitChanges();
         }
@@ -110,9 +115,14 @@ namespace BudgetManager.Model.Managers
 
 #pragma warning disable 0168// we do not want "declared but never used warning!"
 
-                catch (InvalidOperationException ex)
+                catch (InvalidOperationException)
                 {
                     //We simply go ahead 
+                }
+
+                catch (ArgumentOutOfRangeException)
+                {
+                    previousTransaction = null;
                 }
 
 
@@ -133,16 +143,16 @@ namespace BudgetManager.Model.Managers
             {
                 foreach (var transaction in transactions)
                 {
-                    if (transaction.TransactionType.Name.Equals("Withdrawal"))
-                    {
-                        balanceAfter = balanceAfter - transaction.Amount;
-                        transaction.AccountBalanceAfter = balanceAfter;
-                    }
-                    else if (transaction.TransactionType.Name.Equals("Deposit"))
-                    {
+                    //if (transaction.TransactionType.Name.Equals("Withdrawal"))
+                    //{
+                        //balanceAfter = balanceAfter - transaction.Amount;
+                        //transaction.AccountBalanceAfter = balanceAfter;
+                    //}
+                    ///else if (transaction.TransactionType.Name.Equals("Deposit"))
+                   // {
                         balanceAfter = balanceAfter + transaction.Amount;
                         transaction.AccountBalanceAfter = balanceAfter;
-                    }
+                    //}
                 }
             }
 

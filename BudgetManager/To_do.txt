@@ -2,13 +2,9 @@
 Proper encapsulation!
 Error Handling
 Remove unused usings
-REFRESH COMMAND by Mediator!!!
-NO FUTURE DATES!
 Linq to SQL Repository Caching 
 TEST APPLICATION!
 DataTemplate for Transactions
-Currency settings!!!!
-Refresh charts after adding transactions
 Import/Export Database File
 **********************************************************************************************
 DONE:
@@ -28,6 +24,17 @@ Transactions Coloring!!!
 Solve problem with currencies (Move currency to Settings, probably) Custom Configuration!!
 New and Refresh button styles
 Overview Tab
+Currency settings!!!!
+Refresh charts after adding transactions
+TransactionType Determined Automatically
+NO FUTURE DATES!
+REFRESH COMMAND by Mediator!!!
 **********************************************************************************************
 DESIGN PATTERNS:
 Mediator for ViewModel Communications
+
+**********************************************************************************************
+Bugs:
+
+Bug#1: Add new account -> add transaction -> delete added account (ChangeConflictException - row not found) FIXED
+Bug#2: Delete last transaction exception (ArgumentOutOfRangeException) FIXED

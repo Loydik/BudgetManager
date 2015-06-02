@@ -41,6 +41,7 @@ namespace BudgetManager.Model.Managers
 
         public void DeleteAccount(int? id)
         {
+            UpdateAccounts();
             Account entity = _db.Accounts.Single(n => n.Id == id);
             _db.Accounts.DeleteOnSubmit(entity);
             _db.SubmitChanges();

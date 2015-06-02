@@ -25,9 +25,10 @@ namespace BudgetManager.ViewModel.Transactions
 
         private ICommand _createNewTransactionCommand;
         private ICommand _closeWindowCommand;
+        private IWindowFactory _windowFactory;
 
         private const decimal MaxAmount = 999999999999999999m;
-        //private const decimal MinAmount = -999999999999999999m;
+        private const decimal MinAmount = -999999999999999999m;
 
         #region Construction
 
@@ -36,6 +37,7 @@ namespace BudgetManager.ViewModel.Transactions
             _accManager = new AccountsManager();
             _transManager = new TransactionsManager();
             _financialManager = new FinancialManager();
+            _windowFactory = new ProductionWindowFactory();
             Date = DateTime.Now;
             SelectedTransactionType = TransactionTypes.FirstOrDefault();
             SelectedCategory = Categories.FirstOrDefault();
@@ -154,26 +156,46 @@ namespace BudgetManager.ViewModel.Transactions
 
         public void CreateNewTransaction(Window x)
         {
-            _transManager.AddTransaction(Date, SelectedAccount.Id, Amount, SelectedCategory.ID, Comments, SelectedTransactionType.ID);
-            var addedTransaction = _transManager.Transactions.Last();
-
-            if (Date < DateTime.Today)
+            if (Amount < 0)
             {
-                _financialManager.UpdateTransactionsAfterBalancesinAccount(SelectedAccount.Id, Date, addedTransaction.ID);
+                SelectedTransactionType = TransactionTypes.Single(n => n.Name == "Withdrawal");
+            }
+            else if (Amount > 0)
+            {
+                SelectedTransactionType = TransactionTypes.Single(n => n.Name == "Deposit");
             }
 
-            _financialManager.UpdateAccountBalance(SelectedAccount.Id, Amount, SelectedTransactionType, addedTransaction.ID);
-            
-            //We are notifying that Transactions have changed
-            Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "TransactionAdded");
+            if (Date.Date > DateTime.Today)
+            {
+                _windowFactory.ShowMessage("The date cannot be in the future!");
+            }
+            else
+            {
 
-            this.CloseWindow(x);
+                _transManager.AddTransaction(Date, SelectedAccount.Id, Amount, SelectedCategory.ID, Comments,
+                    SelectedTransactionType.ID);
+                var addedTransaction = _transManager.Transactions.Last();
+
+                if (Date < DateTime.Today)
+                {
+                    _financialManager.UpdateTransactionsAfterBalancesinAccount(SelectedAccount.Id, Date,
+                        addedTransaction.ID);
+                }
+
+                _financialManager.UpdateAccountBalance(SelectedAccount.Id, Amount, SelectedTransactionType,
+                    addedTransaction.ID);
+
+                //We are notifying that Transactions have changed
+                Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "TransactionAdded");
+                this.CloseWindow(x);
+            }
+            
         }
 
         public Boolean CreateNewTransactionCanExecute()
         {
             
-            if(_amount != 0 && 0<=_amount && _amount<=MaxAmount && SelectedCategory != null && SelectedAccount != null && SelectedTransactionType != null)
+            if(_amount != 0 && _amount>=MinAmount && _amount<=MaxAmount && SelectedCategory != null && SelectedAccount != null)
             {
                 return true;
             }

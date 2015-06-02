@@ -71,14 +71,14 @@ namespace BudgetManager.ViewModel.Transactions
         {
             get
             {
-                if (this.TransactionType == "Withdrawal")
-                {
-                    return "-" + Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
-                }
-                else
-                {
+                //if (this.TransactionType == "Withdrawal")
+                //{
+                    //return "-" + Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
+                //}
+                //else
+                //{
                     return Amount.ToString("F") + " " + TransactionObj.Account.Curency.Symbol;
-                }
+                //}
             }
         }
 

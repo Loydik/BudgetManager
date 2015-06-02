@@ -95,6 +95,7 @@ namespace BudgetManager.ViewModel.Transactions
             get { return _mediatorTransactionsMessage; }
             set {
                 if (value == "TransactionAdded" || value == "TransactionEdited")
+                if (value == "TransactionAdded" || value == "TransactionEdited")
                     {
                      _mediatorTransactionsMessage = value; 
                      Refresh();
@@ -265,7 +266,7 @@ namespace BudgetManager.ViewModel.Transactions
             _financialManager.UpdateTransactionsAfterBalancesinAccount(accountId, trans.Date, trans.TransactionID);
             _financialManager.RefreshAccountBalance(accountId);
             Refresh();
-            Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "Transaction Deleted");
+            Mediator.Instance.NotifyListeners(ViewModelMessages.TransactionsChanged, "TransactionDeleted");
         }
 
         #endregion

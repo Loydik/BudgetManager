@@ -37,7 +37,7 @@ namespace BudgetManager.Model.Managers
                     total = total + transaction.Amount;
                 }
 
-                cdc.Number = total;
+                cdc.Number = Math.Abs(total);
                 visualCategories.Add(cdc);
             }
 
@@ -62,7 +62,7 @@ namespace BudgetManager.Model.Managers
                     total = total + transaction.Amount;
                 }
 
-                cdc.Number = total;
+                cdc.Number =  Math.Abs(total);
                 visualCategories.Add(cdc);
             }
 
@@ -72,7 +72,9 @@ namespace BudgetManager.Model.Managers
         public void UpdateTransactions()
         {
             _transactionsManager.UpdateTransactions();
+            _reportsManager.UpdateTransactions();
         }
+
 
         //Class which will represent the data to be plotted
         public class CategoryDisplayClass

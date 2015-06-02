@@ -37,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <!--1st Column-->
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Type"></TextBlock>
+            <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Type"></TextBlock>-->
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Date"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Account"></TextBlock>
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Amount"></TextBlock>
@@ -45,11 +45,11 @@
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Comments"></TextBlock>
 
             <!--2nd Column-->
-            <ComboBox Grid.Row="0" Grid.Column="1"
+            <!--<ComboBox Grid.Row="0" Grid.Column="1"
                       ItemsSource="{Binding TransactionTypes}"
                       DisplayMemberPath="Name"
                       SelectedValue="{Binding Path=SelectedTransactionType}">
-            </ComboBox>
+            </ComboBox>-->
             <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Path=Date, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
             <ComboBox Grid.Row="2" Grid.Column="1"
                       ItemsSource="{Binding Accounts}"

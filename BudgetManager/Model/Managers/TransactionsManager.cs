@@ -51,6 +51,7 @@ namespace BudgetManager.Model.Managers
             TransactionCategories = _db.Categories.ToList();
         }
 
+
         public void UpdateTransactionFields(int? id, DateTime date, int accountId, decimal amount, int categoryId, String comments, int transactionTypeId)
         {
             Transaction entity = _db.Transactions.Single(n => n.ID == id);
@@ -84,6 +85,7 @@ namespace BudgetManager.Model.Managers
 
         public void DeleteCategory(int id)
         {
+            UpdateCategories();
             Category entity = _db.Categories.Single(n => n.ID == id);
             Category uncategorized = _db.Categories.Single(n => n.Name == "Uncategorized");
 
